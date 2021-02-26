@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表展示</title>
+</head>
+<body>
+<div id="one">
+    <span>{{message}}</span>
+    <ul>
+        <li v-for="item in movies">{{item}}</li>
+    </ul>
+</div>
+</body>
+</html>
+
+<script src="../vue库/vue.js"></script>
+<script>
+  let app = new Vue({
+    el: "#one",
+    data: {
+      message: "刘德樟",
+      movies: ["大神猴", "全职法师", "全职高手", "大话西游", "盗梦空间"],
+    },
+  });
+</script>

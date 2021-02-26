@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      #menu {
+        width: 100px;
+        height: 200px;
+        background-color: gray;
+        position: absolute;
+        left: -100px;
+        top: 200px;
+      }
+      #menu span {
+        width: 20px;
+        height: 60px;
+        line-height: 20px;
+        background-color: yellow;
+        position: absolute;
+        left: 100px;
+        top: 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="menu">
+      <span>分享 </span>
+    </div>
+  </body>
+</html>
+<script>
+  window.addEventListener("load", function () {
+    let menu = document.querySelector("#menu");
+    menu.addEventListener("mouseenter", function () {
+      startMenu(menu, 0, 30);
+    });
+    menu.addEventListener("mouseleave", function () {
+      startMenu(menu, -100, 5);
+    });
+
+    /**
+     * 动画
+     * obj     目标元素
+     * objDis  目标距离
+     * spend   速度
+     * **/
+    function startMenu(obj, objDis, spend) {
+      let timer = null;
+      // let spend = 10;
+      // 启动定时器时将上一次定时器关闭
+      clearInterval(timer);
+      timer = setInterval(function () {
+        // 判断元素到屏幕左边的距离是否大于目标距离
+        obj.offsetLeft < objDis
+          ? (spend = Math.abs(spend))
+          : (spend = -Math.abs(spend));
+        if (obj.offsetLeft == objDis) {
+          clearInterval(timer);
+        } else {
+          obj.style.left = obj.offsetLeft + spend + "px";
+        }
+      }, 30);
+    }
+  });
+</script>

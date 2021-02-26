@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        width: 150px;
+        height: 150px;
+        background-color: black;
+        position: absolute;
+        top: 100px;
+      }
+      button {
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <button>开始</button>
+    <div></div>
+  </body>
+</html>
+<script>
+  window.addEventListener("load", function () {
+    let div = document.querySelector("div");
+    let btn = document.querySelector("button");
+    btn.addEventListener("click", function () {
+      animation(div, 800);
+    });
+
+    /**
+     * animation 动画函数
+     * obj        目标对象
+     * objDis     目标距离
+     * **/
+    function animation(obj, objDis) {
+      let timer = null;
+      // 清除动画
+      clearInterval(timer);
+      timer = setInterval(function () {
+        // 速度   公式 = 目标距离 - 当前元素距父元素的距离
+        let speed = (objDis - obj.offsetLeft) / 8;
+        // 因为除速会有小数大于0向上取整,小于0项下取整
+        speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+        if (obj.offsetLeft == objDis) {
+          clearInterval(timer);
+        } else {
+          obj.style.left = obj.offsetLeft + speed + "px";
+        }
+      }, 30);
+    }
+  });
+</script>

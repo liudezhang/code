@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var user = {
+				name:"蔡徐坤",
+				type:"NBA形象大使",
+				like:"篮球"
+			}
+			
+			
+			// var name = user.name;
+			// var type = user.type;
+			// var like = user.like;
+			
+			var {name,type,like} = user
+			console.log(name)
+			console.log(type)
+			console.log(like)
+			
+			var abc = "456";
+			({abc} = {abc:"789"})
+			console.log(abc)
+		</script>
+	</body>
+</html>

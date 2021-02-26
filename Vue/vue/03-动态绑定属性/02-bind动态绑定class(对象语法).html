@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+      .active {
+          color: red;
+      }
+      .one{
+          font-size: 30px;
+      }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!--    <h2 class="active">{{counter}}</h2>-->
+  <!--    <h2 :class="active">{{counter}}</h2>-->
+
+  <!--    <h2 v-bind:class="{key1:value1,key2:value2}">{{counter}}</h2>-->
+<!--  对象语法 通过类名后面接一个布尔值 来判断类名存不存在-->
+  <!--    <h2 v-bind:class="{类名1:boolean,类名2:boolean}">{{counter}}</h2>-->
+
+  <h2 v-bind:class="{active:isActive ,one:isOne}">{{counter}}</h2>
+  <h2 v-bind:class="getClass()">{{counter}}</h2>
+  <button v-on:click="btnClick()">按钮</button>
+
+<!--  语法糖-->
+  <h2 :class="{active:isActive,one:isOne}">{{counter}}</h2>
+  <h2 :class="getClass()">{{counter}}---{{isActive}}---{{isOne}}</h2>
+  <button @click="btnClick()">按钮</button>
+
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      counter: "helloworld",
+      isActive: true,
+      isOne: true,
+    },
+    methods: {
+      btnClick: function () {
+        // 通过取反来实现 类的存在或不存在
+        this.isActive = !this.isActive;
+        this.isOne = !this.isOne;
+      },
+      getClass: function () {
+        return {active: this.isActive, one: this.isOne};
+      },
+    },
+  });
+</script>
+</body>
+</html>

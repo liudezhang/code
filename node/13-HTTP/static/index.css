@@ -1,0 +1,20 @@
+* {
+    /* margin: 0;
+    padding: 0; */
+    list-style-type: none;
+}
+
+h1 {
+    background-color: red;
+    font-size: 50px;
+    color: skyblue;
+}
+
+p {
+    color: royalblue;
+    font-style: unset;
+}
+
+h3 {
+    color: violet;
+}

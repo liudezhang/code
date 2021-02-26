@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* 
+                                                                            push() 方法返回的是新数组的长度       
+                                                                        */
+        var arr = ['北京', '深圳', '广州', '上海'];
+        var res = arr.push('刘德樟', '毕家豪');
+        console.log(arr);
+        console.log(res);
+        var pop = arr.pop();
+        console.log(pop);
+        console.log(arr);
+        var shift = arr.shift();
+        console.log(shift);
+        console.log(arr);
+        var unshift = arr.unshift('刘煌');
+        console.log(unshift);
+        console.log(arr);
+
+
+
+        var arr1 = [10, 20, 30, 40];
+        var arr2 = [50, 60, 70, 80];
+        var newArr = arr1.concat(arr2, '刘德樟');
+        console.log(newArr);
+        for (const i in newArr) {
+            console.log(newArr[i]);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

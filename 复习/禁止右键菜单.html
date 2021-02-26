@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul {
+            display: none;
+            width: 100px;
+            height: 200px;
+            /* background-color: silver; */
+            list-style: none;
+            position: absolute;
+        }
+        
+        ul li {
+            flex: 1;
+            line-height: 300%;
+            background-color: rgba(80, 78, 78, 0.5);
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>菜单一</li>
+        <li>菜单二</li>
+        <li>菜单三</li>
+    </ul>
+</body>
+
+</html>
+
+<script>
+    window.onload = function() {
+
+        let ul = document.querySelector('ul');
+        document.oncontextmenu = function() {
+                // 返回值为true（默认）表示显示，为false表示禁止浏览器的右键菜单
+                return false;
+            }
+            // 实现自定义右键菜单
+        document.onmousedown = function(ev) {
+            let e = ev || window.event;
+            // 判断鼠标按下的是否是右键
+            if (e.button == 2) {
+                ul.style.display = 'block';
+                ul.style.top = e.clientY + 'px';
+                ul.style.left = e.clientX + 'px';
+            } else {
+                ul.style.display = 'none';
+            }
+        }
+    }
+</script>

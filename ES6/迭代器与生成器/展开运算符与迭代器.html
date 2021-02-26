@@ -1,0 +1,43 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-25 18:30:38
+ * @LastEditTime: 2020-12-25 19:39:37
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\迭代器与生成器\展开运算符与迭代器.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let a = [1, 2, 3]
+    let b = [7, 8, 9]
+    let c = [...a, ...b]
+    console.log(c);
+
+    function* abc() {
+        yield 1;
+        yield 5;
+        yield 10;
+        yield 15;
+        yield 20;
+    }
+    let one = abc();
+    // let tt = [...one]; 
+    // console.log(tt);
+
+    console.log(one.next());
+    console.log(one.throw(new Error('这是迭代器的错误')));
+</script>

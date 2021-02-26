@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  /* 
+      集合：
+          1、不重复
+          2、无序
+  
+      Set
+        属性：
+            .size   返回set实例的成员总数
+        
+        操作方法：
+            1、.add(value) 方法向set结构添加成员,返回set结构本身
+            2、.delete(value) 删除某个值，返回一个布尔值，表示是否删除成功
+            3、.has(value) 返回一个布尔值，判断该值是否为Set的成员
+            4、.clear() 清除所有成员（数据），没有返回值
+        
+        遍历方法：
+            Set.prototype.keys()：返回键名的遍历器
+            Set.prototype.values()：返回键值的遍历器
+            Set.prototype.entries()：返回键值对的遍历器
+            Set.prototype.forEach()：使用回调函数遍历每个成员
+
+
+
+
+      Map
+  */
+
+  let imgs = new Set();
+  //添加元素
+  /*  imgs.add(100);
+  imgs.add(100);
+  imgs.add("hello");
+  imgs.add("hello");
+  imgs.add(true);
+  imgs.add(new String("world"));
+  imgs.add(new String("world")); */
+
+  // console.log(imgs);
+
+  /* 
+      集合遍历
+      for...of 遍历集合
+  */
+  /* for(let item of imgs.keys()){
+     console.log(item);
+ } */
+
+  /*  for(let item of imgs.values()){
+     console.log(item);
+ } */
+
+  //    imgs.entries
+  /* for(let item of imgs.entries()){
+     console.log(item);
+  } */
+
+  // let set = new Set([1, 4, 9]);
+  // set.forEach((value, key) => console.log(key + " : " + value));
+  // 1 : 1
+  // 4 : 4
+  // 9 : 9
+
+  /* //数组变集合
+  var set = new Set([10, 20, 30, 40, 50, 40, 30, 20, 10]);
+  // console.log(set);
+
+  //集合变数组  将数据结构展开成数组
+  var arr = [...set];
+  alert(arr); */
+
+  var arr = [10, 20, 30, 40, 50, 40, 30, 20, 10];
+  arr = [...new Set(arr)];
+  alert(arr);
+
+  // Array.from方法可以将 Set 结构转为数组
+  const items = new Set([1, 2, 3, 4, 5]);
+  const array = Array.from(items);
+
+  /* 
+      map映射
+  */
+  let map = new Map();
+
+  //添加数据
+  map.set("张三", "打渔的");
+  map.set("李四", "种地的");
+  map.set("王五", "挖煤的");
+  map.set("李四", "打猎的");
+
+  //    console.log(map);
+
+  /* 
+    取值
+  */
+  //  alert(map.get("王五"));
+
+  /* 
+     map遍历  通过for of
+  */
+  for (let [key, value] of map) {
+    console.log(key, value);
+  }
+</script>

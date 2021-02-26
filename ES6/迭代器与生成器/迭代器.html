@@ -1,0 +1,133 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-25 17:32:48
+ * @LastEditTime: 2020-12-25 18:14:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\迭代器与生成器\迭代器.html
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let arr = ['小红', '小绿', '小黑', '小蓝', '小红', '小紫']
+    for (const value of arr) {
+        console.log(value);
+    }
+    console.log('--------------------------');
+    let one = new Set(arr);
+    console.log(one);
+
+    for (const value of one) {
+        console.log(value);
+    }
+
+    console.log('--------------------------');
+    let str = 'liuDeZhang'
+    for (const value of str) {
+        console.log(value);
+    }
+
+    console.log('--------------------------');
+    let user = new Map();
+    user.set('name', '刘德樟')
+    user.set('age', '19')
+    user.set('sex', '男')
+    console.log(user);
+
+    for (const [key, value] of user) {
+        console.log(key + ':' + value);
+    }
+
+
+    // 普通对象
+    let student1 = {
+        name: '刘德樟',
+        age: '19',
+        sex: '男',
+    }
+
+    // for (const value of student1) {
+    //     console.log(value);
+    //     // 报错 说 student 不是可迭代对象 ，因为student对象没有Symbol.iterator方法
+    // }
+
+    let student2 = {
+        name: '刘德樟',
+        age: '19',
+        sex: '男',
+        // 添加 Symbol.iterator 属性 和 创建生成器
+        *[Symbol.iterator]() {
+            for (const key in this) {
+                yield [key, this[key]]
+            }
+        }
+    }
+
+    console.log(student2);
+
+    for (const [key, value] of student2) {
+        console.log(key + ':' + value);
+    }
+
+    console.log('------------------------------------');
+    /* 
+        内建迭代器
+        entries     返回键值对
+        values      返回值
+        keys        返回键（索引值）
+    */
+
+    console.log(arr.entries());
+    let a = arr.entries();
+
+    for (const [key, value] of a) {
+        console.log(key, value);
+    }
+    let A = arr.values();
+    for (const value of A) {
+        console.log(value);
+    }
+
+    console.log('-------------------------------------');
+
+    console.log(one.entries());
+    let b = one.entries();
+
+    for (const [key, value] of b) {
+        console.log(key, value);
+        // key 和 value 都一样 因为 Set 没有顺序
+    }
+
+    let B = one.values();
+    for (const value of B) {
+        console.log(value);
+    }
+
+
+    console.log('-------------------------------------');
+
+    let c = user.entries()
+    console.log(c);
+    for (const [key, value] of c) {
+        console.log(key, value);
+    }
+
+    let C = user.values()
+    for (const value of C) {
+        console.log(value);
+    }
+</script>

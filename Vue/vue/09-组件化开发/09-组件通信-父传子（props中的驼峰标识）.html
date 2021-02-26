@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--
+      props中使用驼峰标识在传值的时候必须将大写转换成小写
+      例如：
+          cInfo  --》  c-info
+          myOneTwo --》 my-one-two
+      注意：是只要在传值的哪里转换
+   -->
+  <cpn :c-info="info" :child-my-message="message"></cpn>
+</div>
+<template id="one">
+  <div>
+    <!--驼峰标识-->
+    <h2 v-for="item in cInfo">{{item}}</h2>
+    <h2>{{childMyMessage}}</h2>
+  </div>
+</template>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      counter: 0,
+      info: {
+        name: '刘德樟',
+        age: 19,
+        height: 175,
+      },
+      message: '刘德樟'
+    },
+    components: {
+      cpn: {
+        template: '#one',
+        props: {
+          // 驼峰标识
+          cInfo: {
+            type: Object,
+            default() {
+              return {};
+            },
+          },
+          childMyMessage: {
+            type: String,
+            default() {
+              return '';
+            }
+          }
+        },
+      },
+    },
+  });
+</script>
+</body>
+</html>

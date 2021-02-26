@@ -1,0 +1,109 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-24 15:30:38
+ * @LastEditTime: 2020-12-24 20:36:51
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\迭代器与生成器\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 迭代器
+    function iterator(count) {
+        var num = 0;
+        return {
+            pre1: 0,
+            pre2: 0,
+            next: function () {
+                // console.log(num);
+                if (num > count) {
+                    return {
+                        done: true,
+                        value: undefined
+                    }
+                }
+                if (num == 0) {
+                    num++;
+                    this.pre1 = 1;
+                    return {
+                        done: false,
+                        value: 0,
+                    }
+                } else {
+                    num++;
+                    result = this.pre1 + this.pre2;
+                    this.pre2 = this.pre1
+                    this.pre1 = result;
+                    return {
+                        done: false,
+                        value: result
+                    }
+                }
+            }
+        }
+    }
+
+    let user = new Map()
+    user.set('username', '刘德樟')
+    user.set('password', '1823799296')
+    user.set('age', '19')
+    console.log(user);
+
+    let userIterator = user.entries()
+    // console.log(userIterator.next());
+
+    for (const s of userIterator) {
+        console.log(s);
+    }
+
+    let a = iterator();
+
+
+    // 生成器
+    function* builder(count = 10) {
+        let num = 0;
+        let pre1 = 0;
+        let pre2 = 0;
+        if (num == 0) {
+            pre1 = 1;
+            num++;
+            // yield {
+            //     done: false,
+            //     value: 0
+            // }
+            yield 0
+        }
+        while (true) {
+            num++;
+            let result = pre1 + pre2;
+            pre2 = pre1
+            pre1 = result;
+            // yield {
+            //     done: false,
+            //     value: result
+            // }
+            yield result
+            if (num > count) {
+                break;
+            }
+        }
+    }
+
+    let one = builder(30)
+    for (const i of one) {
+        console.log(i);
+    }
+</script>

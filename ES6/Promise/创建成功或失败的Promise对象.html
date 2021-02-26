@@ -1,0 +1,38 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-21 11:49:53
+ * @LastEditTime: 2020-12-21 11:56:29
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\Promise\创建成功或失败的Promise对象.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 创建成功的promise对象
+        let p1 = Promise.resolve('这是成功的Promise对象')
+        console.log(p1);
+        p1.then((res) => {
+            console.log(res);
+        })
+
+
+        // 创建拒绝的promise对象
+        let p2 = Promise.reject('这是失败的Promise对象')
+        console.log(p2);
+        p2.catch((err) => {
+            console.log(err);
+        })
+    </script>
+</body>
+
+</html>

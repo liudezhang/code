@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        section {
+            width: 400px;
+            height: 500px;
+            /* border: 1px solid red; */
+            background-color: silver;
+            margin: 100px auto;
+        }
+        
+        .one {
+            display: flex;
+            width: 100%;
+            height: 50px;
+        }
+        
+        .one div {
+            flex: 1;
+            height: 100%;
+            text-align: center;
+            line-height: 250%;
+            font-size: 20px;
+            border: 1px solid red;
+        }
+        
+        .two div {
+            display: none;
+        }
+        
+        section .block {
+            display: block;
+        }
+        
+        .pon {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="one">
+            <div class="pon">HTML5</div>
+            <div>Python</div>
+            <div>Java</div>
+        </div>
+        <div class="two">
+            <div class="block">
+                HTML5是构建Web内容的一种语言描述方式。HTML5是互联网的下一代标准，是构建以及呈现互联网内容的一种语言方式．被认为是互联网的核心技术之一。
+            </div>
+            <div>
+                Python是一种跨平台的计算机程序设计语言。 是一个高层次的结合了解释性、编译性、互动性和面向对象的脚本语言。最初被设计用于编写自动化脚本(shell)，随着版本的不断更新和语言新功能的添加，越多被用于独立的、大型项目的开发
+            </div>
+            <div>
+                Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。Java语言作为静态面向对象编程语言的代表，极好地实现了面向对象理论，允许程序员以优雅的思维方式进行复杂的编程
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+<script>
+    window.onload = function() {
+        let one = document.querySelector('.one');
+        let two = document.querySelector('.two')
+        let tab = one.querySelectorAll('div');
+        let intr = two.querySelectorAll('div');
+
+        for (let i = 0; i < tab.length; i++) {
+            tab[i].index = i;
+            tab[i].onclick = function() {
+                // alert(this.index);
+                for (let j = 0; j < tab.length; j++) {
+                    tab[j].className = '';
+                    intr[j].style.display = 'none';
+                }
+                this.className = 'pon';
+                intr[this.index].style.display = 'block';
+            }
+        }
+    }
+</script>

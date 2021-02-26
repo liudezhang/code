@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-clock] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- {{}} mustache 语法 -->
+        <h2>{{message}}</h2>
+        <!-- v-once 有这个指令的标签没有响应式，不会随着数据的改变而改变 -->
+        <h2 v-once>{{message}}</h2>
+        <!-- v-html 可以将HTML标签的代码解析出来 -->
+        <h2 v-html="url"></h2>
+        <!-- v-text 用于将数据显示在界面中 和mustache语法相似 -->
+        <h2 v-text="txt"></h2>
+        <!-- v-pre用于跳过这个元素以及子元素的编译过程，用于显示原本的mustache语法 -->
+        <h2 v-pre>{{message}}</h2>
+        <!-- 
+            v-cloak在某些网络较慢的情况下，后台数据还没有传输过来，
+            浏览器可能会直接显示mustache标签，这个指令可以避免这个情况发生
+            不会直接显示mustache标签，会等数据一起加载后再渲染
+        -->
+        <h2 v-cloak>{{message}}</h2>
+    </div>
+    <script src="../vue库/vue.js"></script>
+    <script>
+        setTimeout(function() {
+            const app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'helloworld',
+                    url: '<a href="http://www.baidu.com">百度一下</a>',
+                    txt: 'liudezhang',
+                }
+            })
+        }, 2000)
+    </script>
+</body>
+
+</html>

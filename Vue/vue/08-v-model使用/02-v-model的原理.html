@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--<input type="text" v-model="counter">-->
+  <!-- 实现原理 -->
+  <!--
+      v-model其实是一个语法糖，他的背后本质上时包含两个操作：
+          1. v-bind绑定一个value属性
+          2. v-on指令给当前元素绑定input事件
+  -->
+  <!-- 方法一 -->
+  <input type="text" :value="counter" @input="valueChange">
+  <!-- 方法二 -->
+  <input type="text" :value="counter" @input="counter = $event.target.value">
+
+  <h2>{{counter}}</h2>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      counter: '刘德樟',
+    },
+    methods: {
+      valueChange(e) {
+        this.counter = e.target.value;
+      },
+    },
+  });
+</script>
+</body>
+</html>

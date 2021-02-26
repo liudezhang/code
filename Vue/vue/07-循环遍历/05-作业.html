@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+      .active {
+          color: red;
+          font-size: 30px;
+      }
+  </style>
+</head>
+
+<body>
+<!--作业需求：点击列表中的哪一项，那么该项的文件变成红色-->
+<div id="app">
+  <ul>
+    <li v-for="(m,index) in movies" :class="{active:currentIndex===index}" @click="liClick(index)">
+      {{index}}--{{m}}
+    </li>
+    <!--
+        active:currentIndex === index
+        这句代码的意思是 currentIndex 是一个 报存状态的变量初始值是0
+        当这个变量的值等于当前li的索引号时为真，active：true  表示这个类添加
+        @click="liClick(index
+        li绑定了点击事件，当li被点击的时候就把当前li的索引号赋值个currentIndex
+     -->
+  </ul>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      movies: ["海王", "全职高手", "火影忍者", "全职法师", "大神猴", "战狼"],
+      currentIndex: 0,
+    },
+    methods: {
+      liClick(index) {
+        this.currentIndex = index;
+      },
+    },
+
+  });
+</script>
+</body>
+
+</html>

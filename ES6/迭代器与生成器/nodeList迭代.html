@@ -1,0 +1,61 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-25 18:15:14
+ * @LastEditTime: 2020-12-25 18:27:52
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\迭代器与生成器\nodeList迭代.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>刘德樟1</div>
+    <div>刘德樟2</div>
+    <div>刘德樟3</div>
+    <div>刘德樟4</div>
+    <div>刘德樟5</div>
+    <div>刘德樟6</div>
+    <div>刘德樟7</div>
+    <div>刘德樟8</div>
+    <div>刘德樟9</div>
+    <div>刘德樟10</div>
+
+    <h2>刘德樟1</h2>
+    <h2>刘德樟2</h2>
+    <h2>刘德樟3</h2>
+    <h2>刘德樟4</h2>
+    <h2>刘德樟5</h2>
+</body>
+
+</html>
+<script>
+    /* 
+        nodeList 也是可以迭代的 也有 Symbol.iterator 方法
+        querySelectorAll     获取到的是 nodeList
+        getElementsByTagName  获取到的是  HTMLCollection
+        两者不一样
+    */
+    let divS = document.querySelectorAll('div');
+    console.log(divS);
+    for (const value of divS) {
+        console.log(value);
+    }
+    for (const [key, value] of divS.entries()) {
+        console.log(key, value);
+    }
+
+
+    let h2S = document.getElementsByTagName('h2');
+    console.log(h2S);
+    for (const value of h2S) {
+        console.log(value);
+    }
+</script>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      ul {
+        width: 366px;
+        height: 366px;
+        border: 1px solid black;
+        margin: 100px auto;
+      }
+      ul li {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        margin: 10px;
+        float: left;
+        background-color: silver;
+      }
+      ul li img {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </body>
+</html>
+<script src="startMove.js"></script>
+<script>
+  window.addEventListener("load", function () {
+    let ul = document.querySelector("ul");
+    let lis = ul.querySelectorAll("li");
+    let zidx = 5;
+    for (let i = 0; i < lis.length; i++) {
+      lis[i].style.left = lis[i].offsetLeft + "px";
+      lis[i].style.top = lis[i].offsetTop + "px";
+      // 循环插入图片
+      let img = document.createElement("img");
+      img.src = "img/" + (i + 1) + ".jpg";
+      lis[i].appendChild(img);
+    }
+    for (let i = 0; i < lis.length; i++) {
+      lis[i].style.position = "absolute";
+      lis[i].style.margin = "0px";
+
+      // 给每一个li标签添加移入移除
+
+      lis[i].addEventListener("mouseover", function () {
+        this.style.zIndex = zidx++;
+        startMove(this, {
+          width: 200,
+          height: 200,
+          marginLeft: -50,
+          marginTop: -50,
+        });
+      });
+      lis[i].addEventListener("mouseout", function () {
+        startMove(this, {
+          width: 100,
+          height: 100,
+          marginLeft: 0,
+          marginTop: 0,
+        });
+      });
+    }
+  });
+</script>

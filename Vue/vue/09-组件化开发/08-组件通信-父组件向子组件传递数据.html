@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!-- 调用组件 -->
+  <!-- : v-bind的缩写 一定要有 -->
+  <cpn :one="name" :two="movies"></cpn>
+</div>
+<!-- 组件 -->
+<template id="one">
+  <div>
+    <ul>
+      <li v-for="item in two">{{item}}</li>
+    </ul>
+    <h2>{{one}}</h2>
+  </div>
+</template>
+<script src="../vue库/vue.js"></script>
+<script>
+  const cpn = {
+    template: '#one',
+    // 父传子 ： props
+    // 1.数组
+    // props: ['one', 'two'],
+    // 2.对象
+    props: {
+      // 2.1 类型限制 要求one 传递的数据必须是string类型
+      /*
+        可用的数据类型
+        String
+        Number
+        Boolean
+        Array
+        Object
+        Date
+        Function
+        Symbol
+        当我们有自定义构造函数时，验证也支持自定义的类型
+       */
+      // one: String,
+      // two: Array,
+      //  2.2 提供一些默认值
+      one: {
+        // 限制数据类型，以及必传值
+        type: String,
+        // 提供默认数据类型
+        default: '刘德樟',
+      },
+      two: {
+        type: Array,
+        default: ['刘明', '刘晨曦', '刘德樟', '刘志强', '刘煌'],
+        // 必须传值
+        // required: true,
+      },
+    },
+    data() {
+      return {};
+    },
+    methods: {},
+  };
+  const app = new Vue({
+    el: '#app',
+    data: {
+      name: '刘德樟',
+      movies: ['海王', '战狼', '全职高手', '海贼王'],
+    },
+    // 注册组件
+    components: {
+      cpn,
+    },
+  });
+</script>
+</body>
+</html>

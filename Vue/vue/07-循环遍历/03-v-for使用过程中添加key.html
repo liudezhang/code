@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <!--
+    key的作用主要是为了高效的更新虚拟DOM，其原理是vue在patch过程中通过key可以精准判断两 个节点是否是同一个，从而避免频繁更新不同元素，使得整个patch过程更加高效，减少DOM操作量，提高性能。
+    若不设置key还可能在列表更新时引发一些隐蔽的bug
+    vue中在使用相同标签名元素的过渡切换时，也会使用到key属性，其目的也是为了让vue可以区分它们，否则vue只会替换其内部属性而不会触发过渡效果。
+    key 绑定的值要具有唯一性，最好是value  不能是index 因为 index会随着数组长度而该变
+    -->
+    <li v-for="value in conter" :key="value">{{value}}</li>
+  </ul>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      conter: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+    },
+  });
+</script>
+</body>
+</html>

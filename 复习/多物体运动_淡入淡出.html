@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 100px;
+        height: 50px;
+        background-color: red;
+        margin: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </body>
+</html>
+<script>
+  window.onload = function () {
+    var aDivs = document.getElementsByTagName("div");
+    for (var i = 0; i < aDivs.length; i++) {
+      aDivs[i].alpha = 30;
+      aDivs[i].onmouseover = function () {
+        startMove(this, 100);
+      };
+      aDivs[i].onmouseout = function () {
+        startMove(this, 30);
+      };
+    }
+  };
+
+  /* 
+                原因是：我们整个页面上只有一个定时器。
+                解决：让每一个运动的物体，独立拥有自己的定时器。
+
+            */
+  // var timer = null;
+
+  function startMove(node, iTarget) {
+    clearInterval(node.timer);
+    node.timer = setInterval(function () {
+      var speed = (iTarget - node.alpha) / 8;
+      speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+      if (node.alpha == iTarget) {
+        clearInterval(node.timer);
+      } else {
+        node.alpha += speed;
+
+        node.style.opacity = node.alpha / 100;
+        node.style.filter = "alpha(opacity=" + node.alpha + ")";
+      }
+    }, 30);
+  }
+</script>

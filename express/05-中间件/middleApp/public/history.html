@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>历史相关的书籍</h1>
+    <script src="./javascripts/jquery.js"></script>
+    <script>
+        let http = '/api/5/1';
+        $.get(http).then((res) => {
+            console.log(res);
+            res.books.forEach((item, i) => {
+                $('body').append('<h2>' + item.name + '</h2>')
+            });
+        })
+    </script>
+</body>
+
+</html>

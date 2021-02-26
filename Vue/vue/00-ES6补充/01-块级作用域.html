@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+<script>
+
+  // ES5中的var是没有块级作用域的
+  // ES6中的let是有块级作用域的
+
+  /*ES5之前因为if和for都没有块级作用域的概念，所以在很多时候，我们都必须借助于function的作用域
+  来解决应用外面变量的问题*/
+  /*
+  * ES6中，加入了let，let它是有if和for的块级作用域
+  * */
+
+  console.log("------------------- ES5 ------------------");
+  // 1.变量作用域：变量在什么范围内是可用的
+  {
+    var name = "刘德樟";
+    console.log(name); // 打印刘德樟
+  }
+  console.log(name); // 打印刘德樟
+
+  console.log("----------------------------");
+
+  // 2.没有块级作用域引起的问题：if的块级
+  var func;
+  if (true) {
+    var name = "毕家豪";
+    func = function () {
+      console.log(name);
+    };
+    func();  // 打印毕家豪
+  }
+  name = "刘志强";
+  func(); // 打印刘志强
+
+
+  var name = "liudezhang";
+
+  function fun(name) {
+    name = "刘煌";
+    console.log(name);
+  }
+
+  fun();  // 打印刘煌
+
+  console.log(name);  // 打印liudezhang
+
+
+  console.log("-------------------------------");
+
+  // 3.没有块级作用域引起的问题：for的块级
+  // 为什么闭包可以解决问题：函数是一个作用域
+  // var btns = document.getElementsByTagName("button");
+  // console.log(btns);
+  // for (var i = 0; i < btns.length; i++) {
+  //   // 添加闭包
+  //   (function (a) {
+  //     btns[a].addEventListener("click", function () {
+  //       console.log("第" + (a + 1) + "个按钮被点击了");
+  //       // 获取到的都是i是错误的   放闭包里面是对的
+  //       this.style.backgroundColor = "red";
+  //     });
+  //   })(i)
+  // }
+
+  console.log("------------------- ES6 ------------------");
+  const btns = document.querySelectorAll("button");
+  console.log(btns);
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function () {
+      console.log("第" + i + "个按钮被点击了");
+      for (let i = 0; i < btns.length; i++) {
+        btns[i].style.backgroundColor = "silver";
+      }
+      this.style.backgroundColor = "red";
+    });
+  }
+
+</script>
+</body>
+</html>

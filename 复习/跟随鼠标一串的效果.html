@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        div {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+
+</html>
+
+<script>
+    window.onload = function() {
+        let divs = document.querySelectorAll('div');
+        document.onmousemove = function(ev) {
+            let e = ev || window.event;
+            /* 
+                倒着遍历，最后一个div的位置是前一个div的位置
+            */
+            for (let i = divs.length - 1; i > 0; i--) {
+                divs[i].style.top = divs[i - 1].offsetTop + 'px';
+                divs[i].style.left = divs[i - 1].offsetLeft + 'px';
+            }
+            // 让下标为 0 的div跟随鼠标移动
+            divs[0].style.left = e.clientX + 'px';
+            divs[0].style.top = e.clientY + 'px';
+        }
+    }
+</script>

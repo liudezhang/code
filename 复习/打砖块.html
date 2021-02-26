@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        width: 500px;
+        height: 500px;
+        border: 1px solid black;
+        margin: 100px auto;
+        position: relative;
+      }
+      .son {
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        position: absolute;
+        border-radius: 50%;
+        left: 240px;
+        bottom: 20px;
+        /* z-index: 9; */
+      }
+      .bat {
+        width: 100px;
+        height: 20px;
+        background-color: blue;
+        position: absolute;
+        bottom: 0px;
+        left: 200px;
+      }
+      .brick div {
+        width: 100px;
+        height: 20px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        float: left;
+        /* position: relative; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="son"></div>
+      <div class="bat"></div>
+      <div class="brick">
+        <!-- <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div> -->
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  window.addEventListener("load", function () {
+    let box = document.querySelector(".box");
+    let son = box.querySelector(".son");
+    let bat = box.querySelector(".bat");
+    let brick = box.querySelector(".brick");
+
+    // 让拍子可以水平方向移动
+    dragX(bat);
+
+    // 创建砖块
+    creatBrick(50);
+    // 创建完砖块后要获取砖块
+    let divs = brick.querySelectorAll("div");
+    console.log(divs.length);
+
+    // 随机一个水平方向的速度
+    let speedX = parseInt(Math.random() * 4) + 5;
+    // 随机一个垂直方向的速度
+    let speedY = -(parseInt(Math.random() * 4) + 5);
+
+    let timer = null;
+    timer = setInterval(function () {
+      son.style.left = son.offsetLeft + speedX + "px";
+      son.style.top = son.offsetTop + speedY + "px";
+      if (
+        son.offsetLeft >= box.offsetWidth - son.offsetWidth ||
+        son.offsetLeft <= 0
+      ) {
+        speedX *= -1;
+      }
+      if (son.offsetTop <= 0) {
+        speedY *= -1;
+      }
+      // 判断小球是否落地
+      if (son.offsetTop >= box.offsetHeight - son.offsetHeight) {
+        alert("GAME OVER");
+        // 关闭定时器
+        clearInterval(timer);
+        location.reload(); // 重新刷新页面
+      }
+      // 判断小球是否与拍子碰撞
+      if (konck(son, bat)) {
+        speedY *= -1;
+      }
+      // 判断小球是否与砖块碰撞
+      for (let i = 0; i < divs.length; i++) {
+        if (konck(divs[i], son)) {
+          // 如果碰撞了小球往回弹
+          speedY *= -1;
+          // 删除与小球碰撞的砖块
+          brick.removeChild(divs[i]);
+          // console.log(divs[i]);
+        }
+      }
+    }, 30);
+
+    // 封装一个可以水平拖拽的方法
+    function dragX(node) {
+      node.addEventListener("mousedown", function (ev) {
+        let e = ev || window.event;
+        let offsetX = e.clientX - node.offsetLeft;
+
+        document.addEventListener("mousemove", function (ev) {
+          let e = ev || window.event;
+          let l = e.clientX - offsetX;
+          if (l <= 0) {
+            l = 0;
+          }
+          if (l >= box.offsetWidth - bat.offsetWidth) {
+            l = box.offsetWidth - bat.offsetWidth;
+          }
+          node.style.left = l + "px";
+        });
+      });
+      document.addEventListener("mouseup", function () {
+        document.mousemove = null;
+      });
+    }
+
+    // 判断是否碰撞函数
+    /**
+     * 逆向思维：什么情况下，两个物体绝对碰不到。
+     * **/
+    function konck(node1, node2) {
+      let l1 = node1.offsetLeft;
+      let r1 = node1.offsetLeft + node1.offsetWidth;
+      let t1 = node1.offsetTop;
+      let b1 = node1.offsetTop + node1.offsetHeight;
+
+      let l2 = node2.offsetLeft;
+      let r2 = node2.offsetLeft + node2.offsetWidth;
+      let t2 = node2.offsetTop;
+      let b2 = node2.offsetTop + node2.offsetHeight;
+      if (l2 >= r1 || r2 <= l1 || t2 >= b1 || b2 <= t1) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    // 创建砖块的函数
+    function creatBrick(n) {
+      // let brick = box.querySelector(".brick");
+      for (let i = 0; i < n; i++) {
+        let node = document.createElement("div");
+        node.style.backgroundColor = randomColor();
+        brick.appendChild(node);
+      }
+      /**
+       * 相对定位转绝对定位
+       * 1.如果砖块点击以后消失不见，其他的砖块位置不受影响，必须转绝对定位
+       * 相对定位 => 绝对定位（文档流的装换）
+       * **/
+      let divs = brick.querySelectorAll("div");
+      for (let i = 0; i < divs.length; i++) {
+        divs[i].style.left = divs[i].offsetLeft + "px";
+        divs[i].style.top = divs[i].offsetTop + "px";
+      }
+      //  必须在当前所有的div拥有坐标以后，才能将定位改为绝对定位
+      for (let i = 0; i < divs.length; i++) {
+        divs[i].style.position = "absolute";
+      }
+    }
+
+    // 生成随机颜色函数
+    function randomColor() {
+      var str =
+        "rgba(" +
+        parseInt(Math.random() * 256) +
+        "," +
+        parseInt(Math.random() * 256) +
+        "," +
+        parseInt(Math.random() * 256) +
+        ",1)";
+      return str;
+    }
+  });
+</script>

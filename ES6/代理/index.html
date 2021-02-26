@@ -1,0 +1,49 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-26 15:39:31
+ * @LastEditTime: 2020-12-26 15:50:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\代理\index.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let user = {
+        name: '刘德樟',
+        age: 19
+    }
+
+
+    // 设置代理对象
+    let pUser = new Proxy(user, {
+        // 代理获取属性事件
+        get(target, attr) {
+            // console.log(target);
+            // console.log(attr);
+            return target[attr]
+        },
+        // 代理设置事件
+        set(target, attr, value) {
+            target[attr] = value;
+            console.log(target);
+            console.log(attr);
+            console.log(value);
+        }
+    })
+
+    let age = pUser.age
+</script>

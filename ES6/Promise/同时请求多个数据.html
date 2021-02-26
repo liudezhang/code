@@ -1,0 +1,65 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-21 11:57:31
+ * @LastEditTime: 2020-12-21 19:42:15
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\Promise\同时请求多个数据.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="../img/美女1.jpg" alt="">
+    <script>
+        // 同时处理多个数据，并且在多个数据完成之后再执行什么代码
+        let num = 0
+        for (let i = 0; i < 6; i++) {
+            let img = new Image()
+            img.src = '../img/' + (i + 1) + '.jpg';
+            img.onload = () => {
+                console.log(img.src);
+                num++;
+                num == 6 ? console.log('加载完成') : num = num;
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        num = 0;
+        var pList = []
+        for (let i = 0; i < 6; i++) {
+
+            let p = new Promise(function (resolve, reject) {
+                let img = new Image()
+                img.src = "../img/" + (i + 1) + ".jpg";
+                img.onload = function () {
+                    resolve(img)
+                }
+            })
+            //图片加载修改进度条
+            p.then(function () {
+                num++;
+                var percent = parseInt(num / 8 * 100)
+            })
+            pList.push(p)
+
+        }
+
+        //处理所有图片完成之后的事情
+        let pAll = Promise.all(pList)
+        pAll.then(function (res) {
+            console.log("所有图片加载完毕")
+            console.log(res)
+        })
+    </script>
+</body>
+
+</html>

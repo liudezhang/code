@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+      .one {
+          width: 100px;
+          height: 100px;
+          background-color: red;
+      }
+
+      .two {
+          width: 100px;
+          height: 50px;
+          background-color: silver;
+      }
+  </style>
+</head>
+<body>
+<!-- .stop修饰符的使用 -->
+<div id="app" @click="">
+  <h2>{{counter}}</h2>
+  <!-- @click.stop  停止冒泡行为 -->
+  <div class="one" @click="divClick">
+    <button class="two" @click.stop="stopClick">按钮1</button>
+  </div>
+  <br><br>
+
+  <!-- 2.prevent修饰符的使用 -->
+  <form @submit.prevent action="baidu">
+    <!-- @click.prevent 阻止默认行为 例如：提交按钮 链接跳转 -->
+    <input type="submit" value="提交" @click.prevent="submitClick">
+    <a href="http://www.baidu.com" @click.prevent="submitClick">百度一下</a>
+  </form>
+  <br><br>
+
+  <!-- 3.键盘按键的监听-->
+  <!--
+      在指定的按键触发所设置的键盘事件时触发
+      修饰符设置方式有两种
+      1.ASCII码的方式
+      2.直接写按键的名称   例如  enter  F9  +
+   -->
+  <input type="text" @keyup.F9="keyUpF9">
+  <input type="text" @keyup.+="keyUp">
+  <br><br>
+
+  <!-- 4. .once修饰符的使用 -->
+  <!-- 事件回调一次（只会触发一次） -->
+  <button @click.once="btn2Click">按钮2</button>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      counter: 0,
+    },
+    methods: {
+      divClick() {
+        console.log('div');
+      },
+      stopClick() {
+        console.log('stop');
+      },
+      submitClick() {
+        console.log('prevent');
+      },
+      keyUp() {
+        console.log('keyUp');
+      },
+      keyUpF9() {
+        console.log('F9');
+      },
+      btn2Click() {
+        console.log('once');
+      },
+    },
+  });
+</script>
+</body>
+</html>

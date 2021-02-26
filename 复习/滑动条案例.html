@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            width: 800px;
+            height: 45px;
+            border: 1px solid black;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            margin: 100px auto;
+        }
+        
+        .son {
+            width: 0;
+            height: 45px;
+            background-color: aqua;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .hk {
+            width: 45px;
+            height: 45px;
+            background-color: blue;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="son"></div>
+        <div class="hk"></div>
+    </div>
+</body>
+
+</html>
+<script>
+    window.addEventListener('load', function() {
+        let box = document.querySelector('.box');
+        let son = box.querySelector('.son');
+        let hk = box.querySelector('.hk');
+
+        // 获取本地存储中的滑块位置
+        if (!window.localStorage) {
+            alert('当前浏览器不支持localStorage')
+        } else {
+            let side = localStorage.getItem('side');
+            hk.style.left = side + 'px';
+            // 填充
+            son.style.width = side + 'px';
+        }
+
+        hk.addEventListener('mousedown', function(ev) {
+            let e = ev || window.event;
+            let offsetX = e.clientX - this.offsetLeft;
+            box.addEventListener('mousemove', function(ev) {
+                let e = ev || window.event;
+                let l = e.clientX - offsetX;
+                l <= 0 ? l = 0 : l = l;
+                (l >= box.offsetWidth - hk.offsetWidth) ? l = box.offsetWidth - hk.offsetWidth: l = l;
+                hk.style.left = l + 'px';
+                // 填充
+                son.style.width = l + 'px';
+
+                // 将滑块的位置进行本地存储
+                if (!window.localStorage) {
+                    alert('当前浏览器不支持localStorage')
+                } else {
+                    localStorage.setItem('side', l);
+                }
+            })
+
+        })
+        box.addEventListener('mouseup', function() {
+            box.mousemove = null;
+        })
+    })
+</script>

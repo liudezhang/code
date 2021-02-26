@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  let obj1 = {
+    a: 10,
+  };
+  let obj2 = {
+    b: 20,
+    c: 30,
+  };
+  let obj3 = {
+    d: 40,
+    f: ["hello", "world", true],
+  };
+
+  /***
+   * Object.assign() 合并对象
+   * 【注】 将所有传入的对象，都合并到第一个对象中，
+   *       方法的第一个参数是目标对象，后面的参数都是源对象
+   *            普通数据类型拷贝变量名和值
+   *            复杂数据类型则只浅拷贝
+   *
+   * 浅拷贝：即如果一个键的值是复合类型的值（数组、对象、函数）、
+   * 那么解构赋值拷贝的是这个值的引用，而不是这个值的副本
+   *
+   *
+   */
+
+  Object.assign(obj1, obj2, obj3);
+  // console.log(obj1);
+  // console.log(obj2);
+  // console.log(obj3);
+
+  obj2.b = 50;
+  console.log(obj2);
+
+  obj3.f[1] = "刘德樟";
+  console.log(obj3);
+  console.log(obj1);
+</script>

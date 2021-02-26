@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>多物体多样式运动</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        margin: 50px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div>刘德樟</div>
+    <div></div>
+  </body>
+</html>
+<script>
+  window.addEventListener("load", function () {
+    let divs = document.querySelectorAll("div");
+    divs[0].addEventListener("click", function () {
+      startMove(this, "width", 300);
+    });
+    divs[1].addEventListener("click", function () {
+      startMove(this, "height", 200);
+    });
+    divs[2].addEventListener("click", function () {
+      startMove(this, "marginLeft", 300);
+    });
+    divs[3].addEventListener("click", function () {
+      startMove(this, "fontSize", 30);
+    });
+    divs[4].addEventListener("mouseover", function () {
+      startMove(this, "opacity", 100);
+    });
+    divs[4].addEventListener("mouseout", function () {
+      startMove(this, "opacity", 30);
+    });
+  });
+
+  function startMove(node, attr, iTarget) {
+    clearInterval(node.timer);
+    node.timer = setInterval(function () {
+      // 计算速度
+      let iCur = null;
+      if (attr == "opacity") {
+        iCur = parseInt(parseFloat(getStyle(node, "opacity")) * 100);
+      } else {
+        iCur = parseInt(getStyle(node, attr));
+      }
+      let speed = (iTarget - iCur) / 8;
+      speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+      if (iCur == iTarget) {
+        clearTimeout(node.timer);
+      } else {
+        if (attr == "opacity") {
+          iCur += speed;
+          node.style.opacity = iCur / 100;
+          node.style.filter = "alpha(opacity = " + iCur + ")";
+        } else {
+          node.style[attr] = iCur + speed + "px";
+        }
+      }
+    }, 30);
+  }
+
+  //获取当前有效样式浏览器兼容的写法
+  function getStyle(node, cssStr) {
+    return node.currentStyle
+      ? node.currentStyle[cssStr]
+      : getComputedStyle(node)[cssStr];
+  }
+</script>

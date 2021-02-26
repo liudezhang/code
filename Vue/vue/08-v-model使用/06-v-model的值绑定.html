@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <!--
+      我们前面的value中的值,可以回头去看一 下，都是在定义input的时候直接给定的。
+      但是真实开发中，这些input的值可能是从网络获取或定义在data中的。
+      所以我们可以通过v-bind:value动态的给value绑定值。
+      这不就是v-bind吗?
+  -->
+  <label v-for="item in originHobbies" :for="item">
+    <input type="checkbox" :value="item" :id="item" v-model="counter">{{item}}
+  </label>
+  <h2>{{counter}}</h2>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      counter: [],
+      originHobbies: ['篮球', '足球', '乒乓球', '羽毛球', '高尔夫', '台球'],
+    },
+  });
+</script>
+</body>
+</html>

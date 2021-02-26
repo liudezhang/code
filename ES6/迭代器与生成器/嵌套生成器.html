@@ -1,0 +1,44 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-25 19:40:16
+ * @LastEditTime: 2020-12-25 19:43:25
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\迭代器与生成器\嵌套生成器.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let a = function* () {
+        yield 1;
+        yield 2;
+        yield 3;
+    }
+    let b = function* () {
+        yield 4;
+        yield 5;
+        yield 6;
+    }
+
+    let c = function* () {
+        yield* a();
+        yield* b();
+    }
+
+    let one = c();
+    for (const value of one) {
+        console.log(value);
+    }
+</script>

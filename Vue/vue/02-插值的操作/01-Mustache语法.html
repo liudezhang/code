@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{counter}}</h2>
+    <h2>{{ firtName}}</h2>
+    <h2>{{lastName}}</h2>
+    <h2>{{firtName + " " + lastName}}</h2>
+    <h2>{{num}}{{num}}{{num}}{{num}}</h2>
+    <h2>{{num * 4 / 8 + 200}}</h2>
+    <!--    mustache语法中，不可以直接写变量，也可以写简单的表达式-->
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      counter: "helloworld",
+      firtName: "liude",
+      lastName: "zhang",
+      num: 200,
+    },
+  });
+</script>
+</body>
+</html>

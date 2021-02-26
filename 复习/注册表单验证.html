@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            width: 500px;
+            height: 600px;
+            text-align: center;
+            margin: 100px auto;
+            box-shadow: 0 0 2px 4px silver;
+            font-family: Arial, Helvetica, sans-serif;
+            position: relative;
+        }
+        
+        div {
+            width: 100%;
+            height: 100px;
+            line-height: 100px;
+            font-size: 50px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        input {
+            width: 60%;
+            height: 40px;
+            border: 1px solid silver;
+            border-radius: 10px;
+            box-sizing: border-box;
+            outline: none;
+            padding: 0 5px;
+        }
+        
+        button {
+            width: 40%;
+            height: 50px;
+            outline: none;
+            background-color: silver;
+            border: 1px solid white;
+            margin-top: 50px;
+        }
+        
+        span {
+            display: block;
+            font-size: 16px;
+            opacity: .6;
+            margin: 0 0 20px;
+            color: black;
+        }
+        
+        section {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 30px;
+            position: absolute;
+            right: 40px;
+            bottom: 365px;
+            /* background-color: skyblue; */
+        }
+        
+        .typeCode {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            background-color: tan;
+            text-align: center;
+            float: left;
+            font-size: 12px;
+            opacity: .5;
+            position: absolute;
+            bottom: 315px;
+            right: 140px;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="box">
+        <div>注册</div>
+        <label for="uname">账号：</label>
+        <input type="text" placeholder="请输入账号" id="uname">
+        <br />
+        <span>刘德樟</span>
+        <label for="upawd">密码：</label>
+        <input type="password" placeholder="请输入密码" id="upawd">
+        <section>☯</section>
+        <div class="typeCode">弱</div>
+        <div class="typeCode">中</div>
+        <div class="typeCode">强</div>
+        <button type="submit">注册</button>
+    </form>
+</body>
+
+</html>
+
+<script>
+    window.addEventListener('load', function() {
+        let form = document.querySelector('.box');
+        let name = form.querySelector('#uname');
+        let pawd = form.querySelector('#upawd');
+        let spans = form.querySelector('span');
+        let type = form.querySelector('section');
+        let typeCode = form.querySelectorAll('.typeCode');
+        typeCode[1].style.right = 110 + 'px';
+        typeCode[2].style.right = 80 + 'px';
+        type.addEventListener('click', function() {
+            (pawd.type == 'password') ? pawd.type = 'text': pawd.type = 'password';
+        })
+        name.addEventListener('blur', function() {
+            let emailRegl = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            let nameValue = name.value;
+            // 判断用户名长度
+            if (nameValue) {
+                if (nameValue.length < 6 || nameValue.length > 18) {
+                    spans.innerHTML = '!长度应为6~18个字符';
+                    spans.style.color = 'red';
+                } else if (!/[a-zA-Z]/.test(nameValue[0])) {
+                    spans.innerHTML = '!邮件地址必须以字母开头';
+                    spans.style.color = 'red';
+                } else if (!/\w/.test(nameValue)) {
+                    spans.innerHTML = '!邮件地址必须由数字字母下划线组成';
+                    spans.style.color = 'red';
+                } else if (!emailRegl.test(nameValue)) {
+                    spans.innerHTML = '!请输入正确的邮箱地址';
+                    spans.style.color = 'red';
+                } else if (emailRegl.test(nameValue)) {
+                    spans.innerHTML = '√该邮箱可注册';
+                    spans.style.color = 'green';
+                }
+            } else {
+                spans.innerHTML = '刘德樟';
+                spans.style.color = 'black'
+            }
+        })
+
+        pawd.addEventListener('keyup', function() {
+            let pawdValue = pawd.value;
+            // 弱密码
+            let weakCode = /^[0-9]{6,18}$/;
+            // 中密码
+            let middleCode = /^[a-zA-Z]\w{6,18}$/;
+            // 强密码
+            let strongCode = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,18}$/;
+            for (let i = 0; i < typeCode.length; i++) {
+                typeCode[i].style.background = 'tan';
+            }
+            if (pawdValue.length >= 6) {
+                if (weakCode.test(pawdValue)) {
+                    typeCode[0].style.background = 'green';
+                } else if (middleCode.test(pawdValue)) {
+                    typeCode[1].style.background = 'green';
+                } else if (strongCode.test(pawdValue)) {
+                    typeCode[2].style.background = 'green';
+                }
+            }
+        })
+    })
+</script>

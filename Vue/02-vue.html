@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+        
+        .one {
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2 v-bind:title='meagres'> {{counter}} </h2>
+        <!-- v-bind 指令绑定属性 -->
+        <img v-bind:src="imgUrl" alt="">
+        <a v-bind:href="aUrl">百度一下</a>
+        <!--    <h2 v-bind:class="{类名1:boolean,类名2:boolean}">{{counter}}</h2>-->
+        <h2 v-bind:class='{active:isActive,one:isOne}'>{{counter}}</h2>
+        <h2 v-bind:class='getClass()'>{{counter}}</h2>
+        <button v-on:click='btnClick'>按钮</button>
+        <!-- 语法糖写法 :class :style -->
+        <p :style="{fontSize:200+'px'}">{{counter}}</p>
+    </div>
+    <script src="../vue库/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                counter: 'helloworld',
+                imgUrl: 'https://cn.vuejs.org/images/logo.png',
+                aUrl: 'http://wwww.baidu.com',
+                meagres: '页面加载于 ' + new Date().toLocaleString(),
+                isActive: true,
+                isOne: true,
+            },
+            methods: {
+                btnClick() {
+                    this.isActive = !this.isActive;
+                },
+                getClass() {
+                    return {
+                        active: this.isActive,
+                        one: this.isOne
+                    };
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

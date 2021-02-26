@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+    <div id="header">
+        <div class="navheader">books</div>
+        <div class="nav">
+            <div class="navList">
+
+                <div class="link"><a href="/">首页</a></div>
+
+                <% for(let i=0;i<cataorys.length;i++){ %>
+                <div class="link"><a href="/paging/<%-cataorys[i].id%>/page/1"><%-cataorys[i].classify%></a></div>
+                <%}%>
+
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <% for(let i=0;i<books.length;i++){ %>
+                <div class="contentList">
+                    <a href="/books/<%-books[i].id%>">
+                        <div class="classify"><%-books[i].cataory%></div>
+                        <img class="bookimg" src="<%-books[i].bookimg%>">
+                        <h5 class="name"><%-books[i].name%></h5>
+                        <p class="author"><%-books[i].author%></p>
+                    </a>
+                </div>
+                <%}%>
+    </div>
+    <div id="base">
+        <div class="pageNum">
+            <% if(page>1){ %>
+                <a href="/paging/<%-cid%>/page/<%-(page-1)%>">上一页</a>
+                <% } %>
+
+                <% for(let i=startPage;i<=endPage;i++){ %>
+
+                <a <%if(page==i){%> class='checked' <%}%> href="/paging/<%-cid%>/page/<%-i%>"> <%-i%> </a> <%}%>
+
+            <% if(page<pageAll){ %> <a href="/paging/<%-cid%>/page/<%-(page+1)%>">下一页 </a>
+                <% } %>
+            </div>
+            <div class="allConut">共<%=pageAll%>页</div>
+        </div>
+</body>
+
+</html>

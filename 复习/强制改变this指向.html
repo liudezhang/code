@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>开始</button>
+</body>
+
+</html>
+<script>
+    window.addEventListener('load', function() {
+
+        /**
+         * 强制转换类型的三种方法
+         * call
+         *      格式：函数名.call();
+         *      参数
+         *          第一个参数：传入该函数this指向的对象，传入什么强制指向什么
+         *          第二个参数：将原先函数的参数往后移一位
+         * 
+         * apply
+         *      格式：函数名.apply()
+         *      参数：
+         *          第一个参数：传入该函数this指向的对象，传入什么强制指向什么
+         *          第二个参数：传入一个数组，数组内放入函数要传入的参数
+         * 
+         * 
+         * bind   预设this指向
+         * 
+         */
+
+        function show(x, y) {
+            console.log(this);
+            alert(x + ":" + y)
+        }
+        let btn = document.querySelector('button');
+        // show(10, 20)
+
+        // show.call(btn, 20, 40);
+
+        // show.apply(btn, [45, 50]);
+
+        let res = show.bind('刘德樟');
+        // res(45, 50);
+        // btn.addEventListener('click', function() {
+        //         show.call('刘德樟', 10, 20);
+        //     })
+
+
+        // btn.addEventListener('click', function() {
+        //     show.apply('刘德樟', [20, 30]);
+        // })
+
+        // btn.addEventListener('click', res);
+
+
+        // apply 方法使用的小技巧
+        let arr = [10, 20, 30, 40, 50, 60, 70, 80];
+        console.log(Math.min.apply(null, arr));
+        console.log(Math.max.apply(null, arr));
+
+    })
+</script>

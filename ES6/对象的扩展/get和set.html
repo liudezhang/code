@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	var user = {
+		firstname: '刘',
+		lastname: '德樟',
+		age: '19'
+	}
+
+
+
+	Object.defineProperties(user, {
+		fullname: {
+			// 获取属性时候调用的函数
+			get: function() {
+				return this.firstname + "-" + this.lastname
+			},
+			// 设置属性的时候调用的函数
+			set: function(data) {
+				// console.log(data)
+				var arr = data.split('-');
+				if (arr.length === 2) {
+					this.firstname = arr[0]
+					this.lastname = arr[1]
+				} else {
+					console.error('输入的名字不规范')
+				}
+			}
+		},
+		brief: {
+			get: function() {
+				return "我的名字是" + this.firstname + this.lastname + ',我的年龄是' + this.age
+			}
+		}
+	})
+
+	var teacher = {
+		firstname: '毕',
+		lastname: '家豪',
+		age: '19',
+		get fullname() {
+			return this.firstname + "-" + this.lastname
+		},
+		set fullname(data) {
+			var arr = data.split('-');
+			if (arr.length === 2) {
+				this.firstname = arr[0]
+				this.lastname = arr[1]
+			} else {
+				console.error('输入的名字不规范')
+			}
+		},
+		get brief() {
+			return "我的名字是" + this.firstname + this.lastname + ',我的年龄是' + this.age
+		}
+	}
+</script>

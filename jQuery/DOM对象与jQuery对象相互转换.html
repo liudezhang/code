@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+		<video src="https://v.qq.com/x/page/l3033x493vy.html" muted="muted"></video>
+		<script src="jQuery库/jQuery.3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// 1.DOM对象装换为jQuery对象
+			// (1) 我们直接获取视频，得到的就是jQuery对象
+			// $('video');
+			// console.log($('video'));
+			// (2)我们已经使用原生js获取过来的DOM对象
+			var myvideo = document.querySelector('video');
+			// console.log(myvideo);
+			// $(myvideo).play();  jQuery里面没有play这个方法
+			// 2. jQuery对象装换为DOM对象
+			$('video')[0].play(); 
+		</script>
+	</body>
+</html>

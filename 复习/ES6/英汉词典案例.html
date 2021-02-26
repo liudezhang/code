@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>英汉词典</title>
+    <style>
+      #box {
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        background-color: skyblue;
+        margin: 100px auto;
+      }
+
+      input {
+        width: 200px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 18px;
+        margin: 20px auto;
+      }
+      .desc {
+        width: 240px;
+        height: 200px;
+        background-color: silver;
+        margin: 0 auto;
+        padding: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      <input type="text" placeholder="请输入单词" />
+      <div class="desc"></div>
+    </div>
+  </body>
+</html>
+<script src="../demo.js"></script>
+<script>
+  window.addEventListener("load", function () {
+    let ipt = document.querySelector("input");
+    let div = document.querySelector(".desc");
+
+    let map = new Map();
+
+    let arr = word.split("\n");
+    // console.log(arr.length);
+
+    for (let i = 0; i < arr.length - 1; i += 2) {
+      map.set(arr[i].substring(1), arr[i + 1].substring(6));
+    }
+    // console.log(map);
+
+    ipt.addEventListener("keyup", function () {
+      let value = map.get(this.value);
+      if (value) {
+        div.innerHTML = value;
+      } else {
+        div.innerHTML = "查无此词";
+      }
+    });
+  });
+</script>

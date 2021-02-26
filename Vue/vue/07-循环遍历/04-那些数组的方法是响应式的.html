@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="item in counter" :key="item">{{item}}</li>
+  </ul>
+  <button @click="btnClick">按钮</button>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      counter: ['A', 'D', 'E', 'B', 'C', 'F'],
+    },
+    methods: {
+      btnClick(compareFn) {
+        // 1.push() 在数组末尾添加一个或者多个元素
+        // this.counter.push('刘德樟', '刘志强');
+
+        // 2.pop() 删除数组中的最后一个元素
+        // this.counter.pop();
+
+        // 3.shift() 删除数组中的第一个元素
+        // this.counter.shift();
+
+        // 4.unshift() 在数组前面添加一个或者多个元素
+        // this.counter.unshift('刘志强','毕家豪');
+
+        // 5.splice()
+        /* splice方法的作用：删除元素/插入元素/替换元素
+         * 第一个参数：start  表示在那个位置（数组索引）
+         * 删除元素：第二个参数传入你要删除几个元素（如果没有传，就删除后面所有的元素）
+         * 替换元素：第二个参数，表示要替换几个元素，后面跟上用于替换前面的值
+         * 插入元素：第二个参数，传入0，并且后面跟上要插入的元素
+         * */
+        // this.counter.splice(1);      // 删除
+        // this.counter.splice(1,2,'刘德樟','毕家豪','刘志强','刘煌');     // 替换
+        // this.counter.splice(1,0,'刘德樟','毕家豪','刘志强','刘煌');    // 插入
+
+
+        // 6.sort() 排序数组
+        // this.counter.sort();
+
+
+        // 7.reverse() 翻转数组
+        // this.counter.reverse();
+
+        console.log('--------------- 下面的方法不是响应式 ----------------');
+        // 注意：通过索引值来修改数组中的元素
+        // this.counter[1] = '刘德樟';
+        // 推荐使用下面的方法
+        // 方法一   使用splice
+        // this.counter.splice(1,1,'刘德樟');
+        // 方法二     使用set(要修改的对象，索引值，修改后的值)
+        Vue.set(this.counter, 1, '刘德樟');
+      },
+    },
+  });
+</script>
+</body>
+</html>

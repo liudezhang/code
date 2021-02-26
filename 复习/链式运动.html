@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        margin: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>刘德樟</div>
+  </body>
+</html>
+<script>
+  window.addEventListener("load", function () {
+    let div = document.querySelector("div");
+    /**
+     * 链式运动：
+     *    在于第一个动画结束的时候，开始第二个动画。
+     *    【注】关键点，找到第一个动画结束的时候。
+     */
+    div.addEventListener("click", function () {
+      startMove(this, "width", 300, function () {
+        startMove(this, "height", 200, function () {
+          startMove(this, "marginLeft", 200, function () {
+            startMove(this, "fontSize", 50);
+          });
+        });
+      });
+    });
+
+    /**
+     * 回调函数：我们把函数当做参数传入，在合适的合适的地方调用，叫做回调函数
+     */
+    function startMove(node, attr, iTarget, compete) {
+      clearInterval(node.timer);
+      node.timer = setInterval(function () {
+        let iCur = null;
+        if (attr == "opacity") {
+          iCur = parseInt(parseFloat(getStyle(node, "opacity")) * 100);
+        } else {
+          iCur = parseInt(getStyle(node, attr));
+        }
+        let speed = (iTarget - iCur) / 8;
+        speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+        if (iCur == iTarget) {
+          clearInterval(node.timer);
+          /**
+           * 当运动结束后，应该做什么的代码在这里不能写死。
+           * 【注】封装函数，形参，根据函数不确定的值决定的。
+           * 可以将一段代码编写的权利交个别人。声明一个形参，这个参数是用来接收的，从外面封装号的一个函数
+           * **/
+          // 回调函数
+          if (compete) {
+            // .call() 强行改变this指向
+            compete.call(node);
+          }
+        } else {
+          if (attr == "opacity") {
+            iCur += speed;
+            node.style.opacity = iCur / 100;
+            node.style.filter = "alpha(opacity=" + iCur + ")";
+          } else {
+            node.style[attr] = iCur + speed + "px";
+          }
+        }
+      }, 30);
+    }
+  });
+
+  //获取当前有效样式浏览器兼容的写法
+  function getStyle(node, cssStr) {
+    return node.currentStyle
+      ? node.currentStyle[cssStr]
+      : getComputedStyle(node)[cssStr];
+  }
+</script>

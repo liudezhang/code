@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>电影页</title>
+    <link rel="stylesheet" href="/abc/index.css">
+</head>
+
+<body>
+    <h1>{{name}}</h1>
+    <h3>电影简介:{{brief}}</h3>
+    <p>电影主角：{{author}}</p>
+    <h4>主演</h4>
+    <ul>
+        {%for {list} %}
+        <li>{{item}}</li>
+        {%endfor%}
+    </ul>
+    <h5>主演人物</h5>
+    <ul>
+        {%for {stars} %}
+        <li>
+            <h4>姓名：{{item.name}}</h4>
+            <h6>性别：{{item.sex}}</h6>
+        </li>
+        {%endfor%}
+    </ul>
+</body>
+
+</html>

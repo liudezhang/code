@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{message}}</h2>
+  <!--
+  该指令后面不需要跟任何表达式(比如之前的v-for后面是由跟表达式的)
+  该指令表示元素和组件(组件后面才会学习)只渲染一次，不会随着数据的改变而改变
+  可以在控制台使用app.message='你输入的值'来验证
+-->
+  <h2 v-once>{{message}}</h2>
+</div>
+
+<script src="../vue库/vue.js"></script>
+<script>
+  let app = new Vue({
+    el: "#app",
+    data: {
+      message: "helloworld",
+    },
+  });
+</script>
+</body>
+</html>

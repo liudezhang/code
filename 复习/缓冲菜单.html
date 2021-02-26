@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        right: 0;
+        /* transform: translateY(-50%); */
+      }
+    </style>
+  </head>
+  <body style="height: 5000px">
+    <div></div>
+  </body>
+</html>
+<script>
+  window.addEventListener("load", function () {
+    let div = document.querySelector("div");
+    // 被卷去的高度
+    let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    // 可视区的高度
+    let windowHeight =
+      document.documentElement.clientHeight || document.body.clientHeight;
+    // 被卷去的高度 + （可视区高度 - div的高度（高度包含该元素的垂直内边距和边框，且是一个整数））/ 2）
+    let H = parseInt(scrollTop + (windowHeight - div.offsetHeight) / 2);
+
+    animation(H);
+
+    document.addEventListener("scroll", function () {
+      let div = document.querySelector("div");
+      let scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      let windowHeight =
+        document.documentElement.clientHeight || document.body.clientHeight;
+      let H = parseInt(scrollTop + (windowHeight - div.offsetHeight) / 2);
+      animation(H);
+    });
+    /**
+     * animation 动画函数
+     * obj        目标对象
+     * objDis     目标距离
+     * **/
+    function animation(objDis) {
+      let div = document.querySelector("div");
+      let timer = null;
+      clearInterval(timer);
+      timer = setInterval(function () {
+        let speed = (objDis - div.offsetTop) / 8;
+        speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+        if (div.offsetTop == objDis) {
+          clearInterval(timer);
+        } else {
+          div.style.top = div.offsetTop + speed + "px";
+          document.title = div.offsetTop + ":" + objDis;
+        }
+      }, 30);
+    }
+  });
+</script>

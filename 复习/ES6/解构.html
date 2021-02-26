@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      window.addEventListener("load", function () {
+        /**
+         * 中括号解构
+         *          按位置去赋值一一对应
+         * 大括号解构
+         *
+         */
+
+        // let [a, b, c] = [10, "刘德樟", true];
+        //   console.log(a)
+        //   console.log(b)
+        //   console.log(c)
+
+        let { name, age, sex } = {
+          name: "刘德樟",
+          age: 18,
+          sex: true,
+        };
+
+        // console.log(name);
+        // console.log(age);
+        // console.log(sex);
+
+        /**
+         * 解构的好处
+         *		1、交换两个数
+         *		2、函数可以返回多个值
+         *		3、函数定义参数，和传入参数的顺序改变
+         * 							【注】参数可以带默认值
+         * 		4、快速取出数组中的元素
+         */
+
+        // 1、
+        let [x, y] = [10, 20];
+        // console.log(x + ":" + y);
+        // 交换两个数的值
+        [x, y] = [y, x];
+        // console.log(x + ":" + y);
+
+        // 2、
+        function show() {
+          return ["刘德樟", "毕家豪", "刘志强"];
+        }
+        let [a, b, c] = show();
+        // console.log(a, b, c);
+
+        // 3、
+        function persona({ name = "无名氏", sex = "男", age = "19" }) {
+          alert(name + "性别" + sex + "今年" + age + "岁");
+        }
+        // 传入的是一个对象，就算不传参数也要在小括号里面加一个大括号，不然会报错
+        // persona({});
+
+        // 4、
+        let arr = [10, 20, 30, 40, 50];
+        let { 0: first, 3: last } = arr;
+        console.log(first);
+        console.log(last);
+        console.log(last === arr[3]);
+      });
+    </script>
+  </body>
+</html>

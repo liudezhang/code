@@ -1,0 +1,21 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3",
+    "iconv-lite": "^0.6.2",
+    "jquery": "^3.5.1",
+    "ldzfs": "^0.1.5",
+    "mysql": "^2.18.1",
+    "puppeteer-core": "^5.5.0",
+    "request": "^2.88.2"
+  },
+  "description": ""
+}

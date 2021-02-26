@@ -1,0 +1,76 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-26 15:58:52
+ * @LastEditTime: 2020-12-26 16:25:42
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\代理\代理应用.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+    // 不知道要代理那个对象所以传入一个空对象
+    let DOM = new Proxy({}, {
+        get(target, attr) {
+            let domObj = document.createElement(attr);
+            return (attrs, ...children) => {
+                for (const key in attrs) {
+                    // 设置属性
+                    domObj.setAttribute(key, attrs[key])
+                }
+                for (let i = 0; i < children.length; i++) {
+                    // 判断是不是文本类型
+                    if (typeof children[i] == 'string') {
+                        children[i] = document.createTextNode(children[i]);
+                    }
+                    domObj.appendChild(children[i]);
+                }
+                return domObj;
+            }
+        }
+    })
+
+    let d1 = DOM.div({
+        id: "d1",
+        class: "redBg"
+    }, 'helloWord', '您好')
+    document.body.appendChild(d1)
+
+    let ul = DOM.ul({
+        id: "liebiao",
+        class: "bleakBg"
+    }, DOM.li({
+        class: 'li'
+    }, '列表1'), DOM.li({
+        class: 'li'
+    }, '列表1'), DOM.li({
+        class: 'li'
+    }, '列表1'), DOM.li({
+        class: 'li'
+    }, '列表1'), DOM.li({
+        class: 'li'
+    }, '列表1'), )
+
+    document.body.appendChild(ul)
+
+    let img = DOM.img({
+        src: '../img/美女1.jpg',
+        class: 'one',
+        id: 'two',
+    })
+
+    document.body.appendChild(img)
+</script>

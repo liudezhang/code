@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/stylesheets/register.css">
+    <style>
+        .form {
+            position: relative;
+        }
+
+        .info1,
+        .info2 {
+            display: none;
+            width: 150px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            background-color: silver;
+
+        }
+
+        .info1 {
+            position: absolute;
+            top: 270px;
+            left: 112px;
+        }
+
+        .info2 {
+            position: absolute;
+            top: 265px;
+            left: 115px;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container right-panel-active">
+
+        <!-- Sign Up -->
+        <div class="container__form container--signup">
+            <form action="/rl/register" method="POST" class="form" id="form1">
+                <h2 class="form__title">注册</h2>
+                <input type="text" name="username" placeholder="用户名" class="input" />
+                <input type="email" name="email" placeholder="邮箱" class="input" />
+                <input type="password" name="password" placeholder="密码" class="input" />
+                <button type="submit" disabled='disabled' class="btn">注册</button>
+                <p class='info1'></p>
+            </form>
+        </div>
+
+        <!-- Sign In -->
+        <div class="container__form container--signin">
+            <form action="/rl/login" method="POST" class="form" id="form2">
+                <h2 class="form__title">登录</h2>
+                <input type="email" name="email" placeholder="邮箱" class="input" />
+                <input type="password" name="password" placeholder="密码" class="input" />
+                <a href="#" class="link">忘记密码?</a>
+                <p class='info2'></p>
+                <button type="submit" disabled='disabled' class="btn">登录</button>
+            </form>
+        </div>
+
+        <!-- Overlay -->
+        <div class="container__overlay">
+            <div class="overlay">
+                <div class="overlay__panel overlay--left">
+                    <button class="btn" id="signIn">登录</button>
+                </div>
+                <div class="overlay__panel overlay--right">
+                    <button class="btn" id="signUp">注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/rl.js"></script>
+    <script src="/javascripts/jquery.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            let inputs = document.querySelectorAll('input');
+
+            let form = document.querySelectorAll('.input');
+            let input1 = document.querySelectorAll('#form1 input');
+            let input2 = document.querySelectorAll('#form2 input');
+            let btn1 = document.querySelector('#form1 .btn')
+            let btn2 = document.querySelector('#form2 .btn')
+            // console.log(input1);
+            // console.log(input2);
+            inputs.forEach((item, i) => {
+                if (item.value === '') {
+                    btn1.disabled = true;
+                    btn1.style.cursor = 'not-allowed'
+                    btn2.disabled = true;
+                    btn2.style.cursor = 'not-allowed'
+                }
+            })
+            form.forEach((item, i) => {
+                item.addEventListener('input', () => {
+                    input1.forEach((item, i) => {
+                        if (item.value == '') {
+                            btn1.disabled = true;
+                            btn1.style.cursor = 'not-allowed'
+                        } else {
+                            btn1.disabled = false;
+                            btn1.style.cursor = 'pointer'
+                        }
+                    })
+                    input2.forEach((item, i) => {
+                        if (item.value == '') {
+                            btn2.disabled = true;
+                            btn2.style.cursor = 'not-allowed'
+                        } else {
+                            btn2.disabled = false;
+                            btn2.style.cursor = 'pointer'
+                        }
+                    })
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

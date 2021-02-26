@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!-- if等于true 就显示  等于false就不显示 -->
+  <h2 v-if="true">{{counter}}</h2>
+  <!-- 在实际应用中一般用上面的那种方法，一般是写变量 -->
+  <h2 v-if="isShow">{{counter}}</h2>
+  <h2 v-if="isShow">
+    <div>abc</div>
+    <div>abc</div>
+    <div>abc</div>
+    <div>abc</div>
+    <div>abc</div>
+    <div>abc</div>
+  </h2>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      counter: '你很帅',
+      isShow: true,
+    },
+  });
+</script>
+</body>
+</html>

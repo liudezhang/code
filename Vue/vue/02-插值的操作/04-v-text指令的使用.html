@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{counter}}</h2>
+  <h2 v-text="txt"></h2>
+  <h2 v-text="html"></h2>
+  <h2 v-html="html"></h2>
+
+  <!--
+      v-text作用和Mustache比较相似：都是用于将数据显示在界面中
+      v-text通常情况下，接受一个string类型
+  -->
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      counter: "helloworld",
+      txt: "刘德樟",
+      html:'<a href="http://www.baidu.com">百度一下</a>'
+    },
+  });
+</script>
+</body>
+</html>

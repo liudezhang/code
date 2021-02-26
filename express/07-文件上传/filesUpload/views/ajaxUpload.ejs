@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件上传</title>
+    <style>
+        #preview {
+            width: 600px;
+            height: auto;
+        }
+
+        .ok {
+            width: 800px;
+            height: auto;
+        }
+
+        .ok img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/ajax" method="post">
+        <input type="file" name="imgInput" id="file">
+        <button id="btn" type="button" disabled='disabled'>上传</button>
+    </form>
+    <h1>预览图片</h1>
+    <img id="preview" src="" alt="">
+    <script src="/javascripts/jquery.js"></script>
+    <script>
+        $('#file').change(function (e) {
+            console.log(this.files);
+            $('#btn').removeAttr('disabled', 'false');
+            let file = this.files[0];
+            // 预览图片
+            // 创建预览图片地址
+            let preview = window.webkitURL.createObjectURL(file);
+            $('#preview').attr('src', preview);
+            // 创建formData对象，将文件追加到formData对象里
+            let formDataObj = new FormData();
+            formDataObj.append('imgInput', file);
+            // console.log();
+            $('#btn').click(() => {
+                $('#btn').attr('disabled', 'true');
+                $.ajax({
+                    url: '/imgUpload/ajax',
+                    method: 'post',
+                    data: formDataObj,
+                    processData: false,
+                    contentType: false
+                }).then((res) => {
+                    console.log(res);
+                    $('body').append('<h1>上传成功</h1><div class = "ok">' + res.url + '</div>');
+                    $('#file').val('');
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

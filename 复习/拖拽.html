@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            width: 300px;
+            height: 200px;
+            background-color: silver;
+            border: 5px solid black;
+            position: absolute;
+        }
+        
+        .son {
+            width: 300px;
+            height: 200px;
+            background-color: aqua;
+            border: 5px solid red;
+            position: absolute;
+            left: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="son"></div>
+</body>
+
+</html>
+<script src="too.js"></script>
+<script>
+    /*****
+     * 拖拽：（拖拽三剑客）
+     * mousedown
+     *      记录鼠标被按下位置和被拖拽物体相对距离
+     *      let offsetX = e.clientX - node.offsetLeft;
+     *      let offsetY = e.clientY - node.offsetTop;
+     *      
+     * mousemove
+     *      一直保持相对距离
+     *      node.style.left = e.clientX - offsetX + 'px';
+     *      node.style.top = e.clientY - offsetY + 'px';
+     * mouseup
+     *      取消拖拽
+     */
+
+
+    window.onload = function() {
+        let oDiv = document.querySelector('.box');
+        let tDiv = document.querySelector('.son');
+        drag(oDiv);
+        limitDrag(tDiv);
+    }
+</script>

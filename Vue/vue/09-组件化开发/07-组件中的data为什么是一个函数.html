@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!-- 组件实例对象 -->
+<div id="app">
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn></cpn>
+</div>
+<template id="cpn1">
+  <!-- 计算器模板 -->
+  <div>
+    <h2>单前计算为：{{title}}</h2>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+  </div>
+</template>
+<script src="../vue库/vue.js"></script>
+<script>
+  const obj = {
+    title: 0,
+  };
+  Vue.component('cpn', {
+    template: '#cpn1',
+    // data() {
+    //   return obj;
+    // },
+    /*
+        一个组件的 data 选项必须是一个函数，
+        因此每个实例可以维护一份被返回对象的独立的拷贝：
+     */
+    data() {
+      return {
+        title: 0,
+      };
+    },
+    methods: {
+      increment() {
+        this.title++;
+      },
+      decrement() {
+        this.title--;
+      },
+    },
+  });
+  const app = new Vue({
+    el: '#app',
+    data: {
+      counter: 0,
+    },
+  });
+</script>
+
+<script>
+  // 测试
+  // obj对象有一个内存地址
+  const obj = {
+    name: 'why',
+    age: 18,
+  };
+
+  function abc() {
+    // 返回的是obj对象
+    return obj;
+  }
+
+  // 所以下面的三个对象指向的都是同一个obj对象
+  let obj1 = abc();
+  let obj2 = abc();
+  let obj3 = abc();
+  obj1.name = 'kobe';
+  // 以下三个对象的name属性全部被更改了，因为用的是abc对象
+  console.log(obj1);
+  console.log(obj2);
+  console.log(obj3);
+  // function abc() {
+  //   return{
+  //     name:'liudezhang',
+  //     age:18,
+  //   }
+  // }
+  //
+  // let obj1 = abc();
+  // let obj2 = abc();
+  // let obj3 = abc();
+  // obj1.name = 'kobe';
+  // console.log(obj1);    // kobe
+  // // 只有obj1 改了 obj2 和 obj3没改 因为他们不是同一个对象
+  // // 栈空间不同，（地址不同）
+  // console.log(obj2);    // liudezhang
+  // console.log(obj3);    // liudezhang
+</script>
+
+</body>
+</html>
+

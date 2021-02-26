@@ -1,0 +1,48 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-25 15:56:39
+ * @LastEditTime: 2020-12-25 16:04:29
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\Promise\派生.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    class LdzPromise extends Promise {
+        success(resolve, reject) {
+            this.then(resolve, reject)
+        }
+        fail(reject) {
+            this.then(reject)
+        }
+    }
+
+    let p1 = new LdzPromise(function (resolve, reject) {
+        if (true) {
+            resolve('成功返回内容')
+        } else {
+            reject('请求失败')
+        }
+    })
+
+    p1.success(function (res) {
+        console.log(res);
+    })
+    p1.fail(function (res) {
+        console.log(res);
+    })
+</script>

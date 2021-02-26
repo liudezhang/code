@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="https://www.baidu.com">百度一下</a>
+</body>
+
+</html>
+<script>
+    // /* 
+    // 阻止超链接的默认行为：
+    //     1.使用return  false 超链接就不会执行
+    //             缺点是运行到return，后面的代码就不会执行了
+    //     2.规范的方法w3c标准
+    // */
+    window.onload = function() {
+        // 方法一
+        let a = document.querySelector('a');
+        // a.onclick = function() {
+        //     return confirm('离开当前页面！');
+        // }
+
+
+        // 方法二
+        a.onclick = function(ev) {
+            let e = ev || window.event;
+            preDe(e);
+            alert('后续操作');
+        }
+
+        function preDe(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                window.event.returnValue = false;
+            }
+        }
+
+
+    }
+</script>

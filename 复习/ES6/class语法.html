@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  /***
+   *
+   *      构造函数
+   *
+   *
+   */
+  //  人
+  function PersonOne(name, sex, age) {
+    // 属性
+    (this.name = name), (this.sex = sex), (this.age = age);
+  }
+  // 方法
+  PersonOne.prototype.showSelf = function () {
+    alert(`我叫${this.name}，性别${this.sex}，今年${this.age}岁`);
+  };
+
+  let one = new PersonOne("刘德樟", "男", 18);
+  // console.log(one.name);
+  // console.log(one.sex);
+  // console.log(one.age);
+  // one.showSelf();
+
+  /**
+   * 继承
+   * **/
+  /**
+   * Worker  要  继承 PersonOne中原有的属性和方法
+   * **/
+  function Worker(name, sex, age, job) {
+    // Worker 继承 PersonOne
+    PersonOne.call(this, name, age, sex);
+    // 创造自己的属性
+    this.job = job;
+  }
+  // 方法的继承
+  // 1、通过for...in遍历继承
+  // for (let funName in PersonOne.prototype) {
+  //   Worker.prototype[funName] = PersonOne.prototype[funName];
+  // }
+
+  // 2、通过Object.create()  方法
+  // Worker.prototype = Object.create(PersonOne.prototype);
+
+  // 3、 调用构造函数继承
+  Worker.prototype = new PersonOne();
+
+  // 新增自己的方法
+  Worker.prototype.showJob = function () {
+    alert("我的工作是" + this.job);
+  };
+
+  let w1 = new Worker("刘德樟", "男", 19, "学生");
+  for (let key in w1) {
+    // console.log(key + "=" + w1[key]);
+  }
+  // w1.showSelf();
+  // w1.showJob();
+
+  /**
+   *
+   *    class语法
+   *
+   * **/
+  // ECMA6 class语法
+  // 父函数
+  class PersonTwo {
+    // 属性
+    constructor(name, sex, age) {
+      (this.name = name), (this.age = age), (this.sex = sex);
+    }
+    // 方法
+    showSelf() {
+      alert(`我叫${this.name}，性别${this.sex}，今年${this.age}岁`);
+    }
+  }
+  let two = new PersonTwo("毕家豪", "男", 19);
+  two.showSelf();
+
+  // 子函数
+  class WorkerTwo extends PersonTwo {
+    constructor(name, sex, age, job) {
+      super(name, sex, age);
+      this.job = job;
+    }
+    /**
+     * 【注】：class 语法子函数不需要手动继承父函数的方法
+     * super  关键字会帮我们继承
+     * **/
+    showJob() {
+      alert("我的工作是" + this.job);
+    }
+  }
+  let w2 = new WorkerTwo("吴员睿", "女", 19, "学生");
+  for (const key in w2) {
+    console.log(key + ":" + w2[key]);
+  }
+  w2.showSelf();
+  w2.showJob();
+</script>

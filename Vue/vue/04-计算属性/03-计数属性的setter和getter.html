@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <h2>{{fullName}}</h2>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      firstName: "kobe",
+      lastName: "Bryant",
+    },
+    // 计算属性
+    computed: {
+      fullName: {
+        set: function (newValue) {
+          // 计数属性一般没有set方法，只读属性，一般都是不写的
+          // console.log('----', newValue);
+          const names = newValue.split(" ");
+          //split() 字符串分割成字符串数组
+          this.firstName = names[0];
+          this.lastName = names[1];
+        },
+        get: function () {
+          // return 'liudezhang'
+          return this.firstName + " " + this.lastName;
+        },
+      },
+      // 简写方法
+      /*fullName: function () {
+          return this.firstName + ' ' + this.lastName
+      }*/
+    },
+  });
+</script>
+</body>
+</html>

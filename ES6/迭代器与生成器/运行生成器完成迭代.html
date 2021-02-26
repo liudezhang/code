@@ -1,0 +1,53 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-25 19:45:41
+ * @LastEditTime: 2020-12-26 15:05:52
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\迭代器与生成器\运行生成器完成迭代.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 生成器就是一个可以中断的函数，每次中断，就会把中断的yield的值返回
+    function* aIterator() {
+        yield 1;
+        yield 3;
+        yield 5;
+        yield 7;
+        yield 9;
+    }
+
+    function ren(res, fn) {
+        let iterator = res();
+        while (true) {
+            let {
+                value,
+                done
+            } = iterator.next();
+            console.log(value, done);
+            if (done) {
+                break;
+            } else {
+                fn(value)
+            }
+        }
+    }
+
+    ren(aIterator, (value) => {
+        console.log(value + 10);
+    })
+</script>

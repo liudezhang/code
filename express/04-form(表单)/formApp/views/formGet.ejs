@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GET提交</title>
+</head>
+
+<body>
+  <h1>自己写的</h1>
+  <form action="/search" method="get">
+    <input type="text" name="searchKey">
+    <input type="text" name="username">
+    <input type="submit" value="搜索">
+  </form>
+  <h1>express自带的</h1>
+  <form action="/searchOne" method="get">
+    <input type="text" name="searchKey">
+    <input type="text" name="username">
+    <input type="submit" value="搜索">
+  </form>
+  <h1>数据库查找</h1>
+  <form action="/searchBook" method="get">
+    <input type="text" name="username">
+    <input type="submit" value="搜索">
+  </form>
+</body>
+
+</html>

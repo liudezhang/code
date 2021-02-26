@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <label for="male">
+    <!-- radio 如果实现二选一 只要他们的name属性相等就行  （name = 'sex'） -->
+    <!-- 如果使用v-model则不用写name属性 v-model已经实现二选一  -->
+    <input type="radio" id="male" value="男" v-model="sex">男
+  </label>
+  <label for="female">
+    <input type="radio" id="female" value="女" v-model="sex">女
+  </label>
+  <h2>{{sex}}</h2>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      counter: 0,
+      // 如果想要有一个默认属性，给sex一个值就行
+      sex: '',
+    },
+  });
+</script>
+</body>
+</html>

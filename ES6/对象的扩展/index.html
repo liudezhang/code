@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var a = {
+				username: "admin",
+				password: "123456"
+			}
+			//不传第二个参数
+			var b = Object.create(a)
+			console.log(a)
+			console.log(b)
+			//传入第二个参数,可设置新对象的属性
+
+			var c = Object.create(a, {
+				mobile: { //添加新的mobile属性。注意，这一行的冒号不要漏掉
+					value: '110', //通过value关键字设置sex的属性值
+					writable: false,
+					configurable: true,
+					enumerable: true
+				},
+			})
+
+			console.log(c)
+
+
+			student = {
+				school: "sxt",
+				learn: function() {
+					console.log("学生会学习")
+				}
+			}
+
+			var mintor = Object.create(student, {
+				type: {
+					value: "班长",
+					writable: false,
+					configurable: true,
+					enumerable: true
+				},
+				age: {
+					value: "19",
+					writable: true,
+					configurable: true,
+					enumerable: true
+				}
+			})
+
+			console.log(mintor)
+
+			var mintor = Object.defineProperty(mintor, "type", {
+				value: "副班长",
+				writable: true,
+				configurable: true,
+				enumerable: true
+			})
+			console.log(mintor)
+		</script>
+	</body>
+</html>

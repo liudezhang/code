@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1><%= title %></h1>
+  <p>Welcome to <%= title %></p>
+  <h1>横杆的插入方式</h1>
+  <!-- 横杆是直接插入数据 （将HTML解析渲染后显示） -->
+  <div>
+    <%-articleTitle %>
+  </div>
+  <h1>等号的插入方式</h1>
+  <div>
+    <%=articleTitle %>
+    <!-- 等号是将HTML的相关标签进行转义显示 （不解析渲染HTML直接原文显示）-->
+  </div>
+</body>
+
+</html>

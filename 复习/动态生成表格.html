@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        table {
+            line-height: 30px;
+            text-align: center;
+        }
+        
+        table tr td {
+            width: 100px;
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        table tr:nth-child(odd) {
+            background-color: rgba(21, 172, 241, 0.5);
+        }
+        
+        table tr:nth-child(even) {
+            background-color: rgba(226, 54, 11, 0.5);
+        }
+        
+        table tr td button {
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+        }
+        
+        #box {
+            display: none;
+            outline: none;
+            border: 1px solid black;
+            width: 150px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 2px;
+            z-index: 99;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <label for="row">请输入行：</label>
+    <input type="number" placeholder="行" id="row" /><br />
+    <label for="col">请输入列：</label>
+    <input type="number" placeholder="列" id="col" />
+    <button>生成</button>
+    <table border="1"></table>
+
+    <input type="text" id="box" />
+    <script>
+        window.addEventListener("load", function() {
+            let row = document.querySelector("#row");
+            let col = document.querySelector("#col");
+            let btn = document.querySelector("button");
+            let tab = document.querySelector("table");
+            let ipt = document.querySelector("#box");
+
+            // 动态生成
+            btn.addEventListener("click", function() {
+                if (!row.value || !col.value) {
+                    alert("请输入行列");
+                } else {
+                    // 行
+                    for (let i = 0; i < row.value; i++) {
+                        let Tr = document.createElement("tr");
+                        // 列
+                        for (let j = 0; j < col.value; j++) {
+                            let Td = document.createElement("td");
+                            Tr.appendChild(Td);
+                        }
+                        let scTd = document.createElement("td");
+                        let scBtn = document.createElement("button");
+                        scBtn.innerHTML = "删除";
+                        scTd.appendChild(scBtn);
+                        Tr.appendChild(scTd);
+                        tab.appendChild(Tr);
+                    }
+                    // console.log(row.value + ":" + col.value);
+                }
+            });
+
+            // 删除
+            tab.addEventListener("click", function(ev) {
+                let e = ev || event;
+                let target = e.target || window.event.srcElement;
+                if (target.nodeName.toLowerCase() == "button") {
+                    tab.removeChild(target.parentNode.parentNode);
+                }
+            });
+
+            // 双击输入
+            // 全局target document 点击事件中要用到
+            let target = null;
+            tab.addEventListener("dblclick", function(ev) {
+                let e = ev || event;
+                target = e.target || window.event.srcElement;
+                if (target.nodeName.toLowerCase() == "td") {
+                    ipt.value = "";
+                    ipt.style.display = "block";
+                    ipt.style.left = e.pageX + "px";
+                    ipt.style.top = e.pageY + 10 + "px";
+                    // 获得焦点
+                    ipt.focus();
+                }
+            });
+            // 失去焦点 ipt的值赋值给被点击的td
+            document.addEventListener("click", function() {
+                if (ipt.value) {
+                    // 触发事件的真实元素
+                    target.innerText = ipt.value;
+                    console.log(target);
+                }
+                ipt.style.display = "none";
+            });
+        });
+    </script>
+</body>
+
+</html>

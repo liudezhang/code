@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!-- 这种写法一般不用，如果要用的话使用计算属性的方法 -->
+  <h2 v-if="num>80">优秀</h2>
+  <h2 v-else-if="num>70">良好</h2>
+  <h2 v-else-if="num>60">及格</h2>
+  <h2 v-else>不及格</h2>
+
+  <!-- 一般使用这种方式 -->
+  <h2>{{result}}</h2>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  let num = prompt('请输入你的成绩');
+  const app = new Vue({
+    el: '#app',
+    data: {
+      num,
+    },
+    computed: {
+      result() {
+        let cont = '';
+        if (this.num > 80) {
+          cont = '优秀';
+        } else if (this.num > 70) {
+          cont = '良好';
+        } else if (this.num > 60) {
+          cont = '及格';
+        } else {
+          cont = '不及格';
+        }
+        return cont;
+      },
+    },
+  });
+</script>
+</body>
+</html>

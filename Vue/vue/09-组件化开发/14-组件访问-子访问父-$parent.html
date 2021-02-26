@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn></cpn>
+</div>
+<script src="../vue库/vue.js"></script>
+<!-- vue实例的子组件 -->
+<template id="cpn">
+  <div>
+    <h2>我是子组件</h2>
+    <cpm></cpm>
+  </div>
+</template>
+
+<!-- cpn的子组件 -->
+<template id="cpm">
+  <div>
+    <h2>我是cpm组件</h2>
+    <button @click="btnClick">按钮</button>
+  </div>
+</template>
+
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      counter: "helloworld",
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        data() {
+          return {
+            name: '刘德樟'
+          }
+        },
+        components: {
+          cpm: {
+            template: '#cpm',
+            methods: {
+              btnClick() {
+                // $parent 访问父组件
+                console.log(this.$parent.name);
+              }
+            },
+          }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

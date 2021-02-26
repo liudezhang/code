@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      [v-cloak] {
+          display: none;
+      }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>{{counter}}</h2>
+  <h2 v-cloak>{{counter}}</h2>
+  <!--
+      在某些情况下，我们浏览器可能会直接显然出未编译的Mustache标签
+  -->
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  // 在vue解析之前，h2中有一个属性v-cloak
+  // 在vue解析之后，h2中中没有一个属性v-cloak
+  setTimeout(function () {
+    const app = new Vue({
+      el: "#app",
+      data: {
+        counter: "helloworld",
+      },
+    });
+  }, 1000);
+
+</script>
+</body>
+</html>

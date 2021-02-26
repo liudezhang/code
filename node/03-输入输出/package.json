@@ -1,0 +1,15 @@
+{
+        "name": "45545",
+        "version": "1.0.0",
+        "description": "5",
+        "main": "23121",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "321213",
+        "license": "ISC",
+        "dependencies": {
+          "jquery": "^3.5.1",
+          "request": "^2.88.2"
+        }
+      }

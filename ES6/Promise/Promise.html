@@ -1,0 +1,59 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-21 10:27:59
+ * @LastEditTime: 2020-12-21 10:57:37
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\Promise\Promise.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            //       
+            /* 
+                resolve ---> 决定(解决问题) --->  函数异步成功完成
+                reject  ---> 拒绝  --->   函数异步操作失败
+            */
+            if (false) {
+                resolve("数据执行完成");
+            } else {
+                reject("数据请求失败");
+            }
+        });
+
+        //   console.log(p1);
+        /* 
+            then 方法接收两个函数作为参数，第一个参数是 Promise 执行成功时的回调，第二个参数是 Promise 执行失败时的回调，两个函数只会有一个被调用。
+        */
+        p1.then(
+            (res) => {
+                console.log(res);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+
+        // 函数异步失败时执行
+        p1.catch((err) => {
+            console.log("catch:", err);
+        })
+
+        // finally 是没有参数的（很少能用到）
+        p1.finally((res) => {
+            console.log(res);
+        })
+    </script>
+</body>
+
+</html>

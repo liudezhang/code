@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+      * {
+          list-style: none;
+      }
+  </style>
+</head>
+<body>
+<div id="app">
+  <cpn>
+    <template v-slot="slot">
+      <!--   获取子组件中pLanguages的数据   -->
+      <span v-for="item in slot.data"> {{item}}\</span>
+    </template>
+  </cpn>
+  <cpn>
+    <template slot-scope="slot">
+      <span>{{slot.data.join(' - ')}}</span>
+    </template>
+  </cpn>
+  <cpn>
+    <div slot-scope="slot">
+      <span>{{slot.data.join(' / ')}}</span>
+    </div>
+  </cpn>
+</div>
+<template id="cpn">
+  <div>
+    <!--  :data 是把子组件里pLanguages传出去 让父组件可以使用  -->
+    <slot :data="pLanguages">
+      <ul>
+        <li v-for="item in pLanguages">{{item}}</li>
+      </ul>
+    </slot>
+  </div>
+</template>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      counter: "helloworld",
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        data() {
+          return {
+            pLanguages: ['javascript', 'java', 'c++', 'c', 'python', 'c#', 'node', 'GO'],
+
+          }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

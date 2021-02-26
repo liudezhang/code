@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      div {
+        width: 1100px;
+        height: 220px;
+        border: 1px solid black;
+        margin: 100px auto;
+        overflow: hidden;
+        position: relative;
+      }
+      div ul {
+        position: absolute;
+        left: 0;
+      }
+      ul li {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        margin: 10px;
+        float: left;
+      }
+      ul li img {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </body>
+</html>
+<script src="startMove.js"></script>
+<script>
+  window.addEventListener("load", function () {
+    let div = document.querySelector("div");
+    let ul = div.querySelector("ul");
+    let lis = ul.querySelectorAll("li");
+
+    for (let i = 0; i < lis.length; i++) {
+      let img = document.createElement("img");
+      img.src = "img/" + (i + 1) + ".jpg";
+      lis[i].appendChild(img);
+    }
+
+    ul.innerHTML += ul.innerHTML;
+    // let l = parseInt(getStyle(ul, "width"));
+    // console.log(l);
+    ul.style.width = 220 * lis.length * 2 + "px";
+    setInterval(function () {
+      startMove(ul, { left: ul.offsetLeft - 220 }, function () {
+        if (ul.offsetLeft <= -ul.offsetWidth / 2) {
+          // console.log(ul.offsetLeft);
+          // console.log(-ul.offsetLeft / 2);
+          ul.style.left = "0px";
+        }
+      });
+    }, 1000);
+
+    // setInterval(function () {
+    //   // clearInterval(timer);
+    //   ul.style.left = ul.offsetLeft - 5 + "px";
+    //   if (ul.offsetLeft <= -ul.offsetWidth / 2) {
+    //     ul.style.left = "0px";
+    //   }
+    // }, 30);
+
+    function getStyle(node, cssStyle) {
+      if (node.currentStyle) {
+        return node.currentStyle[cssStyle];
+      } else {
+        return getComputedStyle(node)[cssStyle];
+      }
+    }
+  });
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+<div id="app">
+  <!--    <img src="{{url}}" alt="">-->
+  <!--    错误的做法：这里不可以使用mustache语法-->
+  <!--    正确的做法是使用v-bind指令-->
+  <img v-bind:src="imgUrl" alt="">
+  <a v-bind:href="aUrl">百度一下</a>
+
+  <!--  语法糖的写法（简写）  -->
+  <img :src="imgUrl" alt="">
+  <a :href="aUrl">百度一下</a>
+  <input :type="txt">百度一下</input>
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      counter: "helloworld",
+      imgUrl: "https://cn.vuejs.org/images/logo.png",
+      aUrl: "http://www.baidu.com",
+      txt:'date',
+    },
+  });
+</script>
+</body>
+</html>

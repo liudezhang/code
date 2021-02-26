@@ -1,0 +1,68 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-21 10:58:23
+ * @LastEditTime: 2020-12-24 14:28:43
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\Promise\promiseAjax.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 接口路径
+        let httpUrl = 'https://api.apiopen.top/getJoke?page=1&count=2&type=video'
+
+        function Ajax(url) {
+            return new Promise((resolve, reject) => {
+                // 1、创建 xhr 对象
+                let xhr = new XMLHttpRequest()
+
+                // 2、设置路径
+                xhr.open('GET', url)
+
+                // 3、监听
+                xhr.onreadystatechange = () => {
+                    // 5、处理获取到的数据
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        // 处理获取得到的数据
+                        resolve(xhr);
+                    } else if (xhr.readyState == 4 && xhr.status != 200) {
+                        // 处理失败的结果
+                        reject(xhr);
+                    }
+                }
+                // 4、发送
+                xhr.send()
+            })
+        }
+        console.log(Ajax);
+        let one = Ajax(httpUrl);
+
+        // one.then((res) => {
+        //     let result = JSON.parse(res.response)
+        //     console.log(res);
+        //     console.log(result);
+        // }).catch((res) => console.log(res));
+
+
+        // fetch 原生的封装好的ajax 
+        fetch(httpUrl).then(function (res) {
+            console.log(res);
+            let result = res.json();
+            result.then((result) => {
+                console.log(result);
+            })
+        })
+    </script>
+</body>
+
+</html>

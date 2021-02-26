@@ -1,0 +1,60 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-25 16:10:26
+ * @LastEditTime: 2020-12-25 17:24:35
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\async_await\async_await.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script src="../jQuery.3.5.1.min.js"></script>
+<script>
+    // https://geoapi.qweather.com/v2/city/lookup?
+    // e35e3223cfde4397aa43be45017724aa
+    // 城市
+    let httpUrl1 = `https://geoapi.qweather.com/v2/city/lookup?location=赣州&key=e35e3223cfde4397aa43be45017724aa`;
+    /* 
+        方式一
+    */
+    // fetch(httpUrl1).then((res) => {
+    //     return res.json()
+    // }).then((res) => {
+    //     console.log(res);
+    //     let location = res.location
+    //     console.log(location);
+    //     for (const i in location) {
+    //         console.log(location[i].name);
+    //     }
+    // })
+
+
+    // 方式二
+    async function req() {
+        let res = await fetch(httpUrl1);
+        let jsonObj = await res.json();
+        // console.log(jsonObj);
+        let location = jsonObj.location
+        for (let k of location) {
+            console.log(k);
+            let name = k.name
+            let id = k.id
+            $('body').append(`<h2>${name}</h2><p>${id}</p>`)
+        }
+    }
+
+    req()
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
+
+<script>
+  window.addEventListener("load", function () {
+    let div = document.querySelector("div");
+    let X = 500;
+    let Y = 500;
+
+    // 半径
+    let r = 300;
+    // 代表转过的弧度
+    let i = 0;
+    setInterval(function () {
+      i++;
+      let radian = (i * Math.PI) / 180;
+      let a = Math.sin(radian) * r;
+      let b = Math.cos(radian) * r;
+
+      div.style.left = X + a + "px";
+      div.style.top = Y - b + "px";
+
+      // 创建节点，看到运动轨迹
+      let node = document.createElement("div");
+      node.style.width = "10px";
+      node.style.height = "10px";
+      node.style.backgroundColor = "black";
+      node.style.position = "absolute";
+      node.style.left = div.offsetLeft + "px";
+      node.style.top = div.offsetTop + "px";
+      document.body.appendChild(node);
+    }, 30);
+  });
+</script>

@@ -1,0 +1,108 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-24 14:24:29
+ * @LastEditTime: 2020-12-24 15:27:41
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\async_await\async的ajax.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script src="../jQuery.3.5.1.min.js"></script>
+<script>
+    function Ajax(url) {
+        return new Promise((resolve, reject) => {
+            // 1、创建 xhr 对象
+            let xhr = new XMLHttpRequest()
+
+            // 2、设置路径
+            xhr.open('GET', url)
+
+            // 3、监听
+            xhr.onreadystatechange = () => {
+                // 5、处理获取到的数据
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    // 处理获取得到的数据
+                    let res = JSON.parse(xhr.response);
+                    resolve(res);
+                } else if (xhr.readyState == 4 && xhr.status != 200) {
+                    // 处理失败的结果
+                    reject(xhr);
+                }
+            }
+            // 4、发送
+            xhr.send()
+        })
+    }
+
+    async function test() {
+        let url = "https://api.apiopen.top/getJoke?page=1&count=2&type=video";
+        let res = await Ajax(url)
+        console.log(res);
+    }
+
+    // test();
+
+    /* 
+        获取排行榜里音乐的详细信息
+    */
+    async function getMusic() {
+        let url = "https://api.apiopen.top/musicRankings";
+        let rankListRes = await Ajax(url);
+        console.log(rankListRes);
+        for (let i = 0; i < rankListRes.result.length; i++) {
+            let rankName = rankListRes.result[i].name
+            // console.log(rankListRes.result[i].content[0].song_id);
+            $('body').append(`<h2>${rankName}</h2>`)
+            let content = rankListRes.result[i].content;
+            for (let i = 0; i < content.length; i++) {
+                // console.log(i);
+                // for (const k in content[i]) {
+                //     console.log(k + ':' + content[i][k]);
+                // }
+                // console.log(content[i].song_id);
+                // console.log(content[i]['song_id']);
+
+                /* 
+                    渲染的操作
+                */
+                // 同步 有顺序的加载    
+                let url = 'https://api.apiopen.top/musicDetails?id=' + content[i]['song_id'];
+                $('body').append(`<h4>${rankName}:${content[i]['title']}</h4>`)
+                $('body').append(`<h5>${rankName}:音乐id${content[i]['song_id']}</h5>`)
+                // Promise操作
+                // let url = 'https://api.apiopen.top/musicDetails?id=' + content[i]['song_id'];
+
+                // Ajax(url).then((res) => {
+                //     console.log(res);
+                // })
+
+                // async 操作 (异步加载出来的东西没有顺序)
+                // let fn = async () => {
+                //     // 获取音乐详情数据
+                //     let url = 'https://api.apiopen.top/musicDetails?id=' + content[i]['song_id'];
+                //     let musicList = await Ajax(url);
+                //     // 渲染操作
+                //     // console.log(musicList);
+                //     $('body').append(`<h5>${rankName}:音乐${content[i]['song_id']}</h5>`)
+                // }
+                // fn();
+
+            }
+        }
+    }
+
+    getMusic();
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{url}}</h2>
+  <!--
+      该指令后面往往会跟上一个string类型
+      会将string的html解析出来并且进行渲染
+  -->
+  <h2 v-html="url"></h2>
+
+</div>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      counter: "helloworld",
+      url: '<a href="http://www.baidu.com">百度一下</a>',
+    },
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-24 20:05:49
+ * @LastEditTime: 2020-12-24 20:15:37
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ES6\迭代器与生成器\生成器.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /* 
+        函数前面加 *  
+        关键词 yield 
+    */
+    function* easy() {
+        yield 'one'
+        yield 'two'
+        yield 'three'
+        yield 'four'
+        yield 'five'
+    }
+
+    let a = easy(); // 在这里不执行
+    // console.log(a);
+    // console.log(a.next()); // 碰到next()方法才会执行找到yield 返回值 并中断操作
+    // console.log(a.next());
+
+    for (const s of a) {
+        console.log(s);
+    }
+</script>

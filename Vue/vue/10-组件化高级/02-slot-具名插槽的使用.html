@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <cpn>
+    <!--  使用的时候添加添加插槽name的属性  -->
+    <div slot="center">
+      <button>中间的</button>
+    </div>
+  </cpn>
+</div>
+<template id="cpn">
+  <div>
+    <h2>具名插槽的使用</h2>
+    <!--  给插槽定义名字  -->
+    <slot name="left">左边的</slot>
+    <slot name="center">中间的</slot>
+    <slot name="right">右边的</slot>
+  </div>
+</template>
+<script src="../vue库/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      counter: "helloworld",
+    },
+    components: {
+      cpn: {
+        template: "#cpn"
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

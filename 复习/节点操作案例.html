@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            width: 300px;
+            height: 500px;
+            background-color: silver;
+            margin: 50px auto;
+        }
+        
+        .one {
+            width: 100%;
+            height: 80px;
+            background-color: skyblue;
+            text-align: center;
+        }
+        
+        .one input {
+            width: 90%;
+            height: 30px;
+            font-size: 16px;
+            padding: 0 5px;
+            outline: none;
+        }
+        
+        .one button {
+            width: 30%;
+            height: 40px;
+            outline: none;
+        }
+        
+        .two {
+            width: 100%;
+            /* height: 100%; */
+            background: rgb(214, 211, 211);
+            overflow: hidden;
+        }
+        
+        .two .three {
+            width: 95%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            padding: 0 5px;
+            border-bottom: 1px dashed black;
+        }
+        
+        .two .three span {
+            float: left;
+            margin-right: 5px;
+        }
+        
+        .two .three button {
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="one">
+            <input type="text" placeholder="请输入内容" />
+            <br />
+            <button>增加</button>
+            <button>删除</button>
+            <button>拷贝</button>
+        </div>
+        <div class="two">
+            <!-- <div class="three">
+                <i>1</i>
+                <span>12121233</span>
+                <button>×</button>
+            </div> -->
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function randomColor() {
+        var str = "rgba(" + parseInt(Math.random() * 256) + "," + parseInt(Math.random() * 256) + "," + parseInt(Math
+            .random() * 256) + ",.5)";
+        return str;
+    }
+    window.onload = function() {
+        let one = document.querySelector('.one');
+        let input = one.querySelector('input');
+        let two = document.querySelector('.two');
+        let button = one.querySelectorAll('button');
+        two.style.background = randomColor();
+        let i = 1;
+        button[0].onclick = function() {
+            let val = input.value;
+            if (!val) {
+                alert('输入内容不能为空');
+            } else {
+                let newDiv = document.createElement('div');
+                let newSpan = document.createElement('span');
+                let newBtn = document.createElement('button');
+                let newI = document.createElement('span');
+                let nTxt = document.createTextNode(val);
+                let btnTxt = document.createTextNode('×');
+                let iTxt = document.createTextNode(i + ':');
+                newDiv.className = 'three';
+                newSpan.appendChild(nTxt);
+                newBtn.appendChild(btnTxt);
+                newI.appendChild(iTxt);
+
+                // 给每一个新创建的newBtn节点绑定点击删除事件在插入到页面中
+                newBtn.onclick = function() {
+                    two.removeChild(this.parentNode);
+                }
+
+                newDiv.appendChild(newI);
+                newDiv.appendChild(newSpan);
+                newDiv.appendChild(newBtn);
+                newDiv.style.backgroundColor = randomColor();
+                two.appendChild(newDiv);
+                i++;
+
+            }
+        }
+        button[1].onclick = function() {
+            two.removeChild(two.lastChild);
+        }
+        button[2].onclick = function() {
+            let newNode = two.lastChild.cloneNode(true);
+            // console.log(two.lastChild);
+            two.appendChild(newNode);
+        }
+
+    }
+</script>
